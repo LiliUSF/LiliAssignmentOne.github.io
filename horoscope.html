@@ -17,7 +17,7 @@
     <nav class="nav wrap" aria-label="Main navigation">
       <a class="brand" href="index.html#home" aria-label="Lilis little sky home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a>
       <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span></button>
-      <div class="nav-links"><a href="index.html#daily-note">Daily note</a><a href="horoscope.html" aria-current="page">Daily horoscope</a><a href="tarot.html">Tarot readings</a><a href="about.html">About the chart</a></div>
+      <div class="nav-links"><a href="index.html#daily-note">Daily note</a><a href="horoscope.html" aria-current="page">Daily horoscope</a><a href="tarot.html">Tarot readings</a><a href="oracle.html">Oracle</a><a href="manifestation.html">Manifestation</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">About the chart</a></div>
       <a class="nav-cta" href="index.html#welcome">Find your big three <span aria-hidden="true">✦</span></a>
     </nav>
   </header>
@@ -50,7 +50,7 @@
       </article>
     </div>
   </main>
-  <footer><div class="footer-inner wrap"><a class="brand" href="index.html#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a><span>A cozy corner of the cosmos · <span id="year"></span></span><div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="about.html">Chart &amp; privacy</a></div></div></footer>
+  <footer><div class="footer-inner wrap"><a class="brand" href="index.html#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a><span>A cozy corner of the cosmos · <span id="year"></span></span><div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="oracle.html">Oracle</a><a href="manifestation.html">Manifestation</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">Chart &amp; privacy</a></div></div></footer>
   <script>
     const signs = [
       { name: "Aries", sun: "Today, let a brave beginning be enough; you do not need to see the whole path before taking one thoughtful step.", moon: "Your inner fire may rise quickly. Give the feeling a name before deciding what it asks of you.", rising: "Lead with initiative, and leave room for other people to find their pace beside you." },
@@ -76,6 +76,24 @@
       "For today, make room for a conversation that feels honest, gentle, and real.",
       "For today, choose restoration where you can. You do not have to earn a moment of ease."
     ];
+    const randomItem = (items) => items[Math.floor(Math.random() * items.length)];
+    const reflectionPrompts = {
+      sun: [
+        "Let this be a starting point, not a rulebook; choose the part that feels most like you today.",
+        "A small, deliberate action can help turn this reflection into something real.",
+        "Ask yourself what would feel meaningful to carry into the rest of your day."
+      ],
+      moon: [
+        "Give yourself permission to feel it before you decide what it means.",
+        "A quiet check-in with yourself may be more useful than rushing toward an answer.",
+        "Try offering yourself the same patience you would give someone you love."
+      ],
+      rising: [
+        "You can adjust your approach as the day unfolds; a first impression is not a promise.",
+        "Notice which small choice helps you feel present and grounded in the moment.",
+        "Leave enough room for a pleasant surprise to change your plan."
+      ]
+    };
     const signName = (index) => Number.isInteger(index) && index >= 0 && index < signs.length
       ? signs[index].name
       : null;
@@ -98,14 +116,16 @@
       const sun = signs[sunIndex];
       const moon = signs[moonIndex];
       const rising = signs[risingIndex];
-      const daySeed = Number(`${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}`);
       document.querySelector("#horoscope-sign").textContent =
         `☼ ${sun.name} Sun · ☾ ${moon.name} Moon · ↗ ${rising.name} Rising`;
       document.querySelector("#horoscope-title").textContent = "Three parts of your sky, one day at a time.";
-      document.querySelector("#sun-reading").textContent = sun.sun;
-      document.querySelector("#moon-reading").textContent = moon.moon;
-      document.querySelector("#rising-reading").textContent = rising.rising;
-      document.querySelector("#daily-guidance").textContent = dailyGuidance[daySeed % dailyGuidance.length];
+      document.querySelector("#sun-reading").textContent =
+        `${sun.sun} ${randomItem(reflectionPrompts.sun)}`;
+      document.querySelector("#moon-reading").textContent =
+        `${moon.moon} ${randomItem(reflectionPrompts.moon)}`;
+      document.querySelector("#rising-reading").textContent =
+        `${rising.rising} ${randomItem(reflectionPrompts.rising)}`;
+      document.querySelector("#daily-guidance").textContent = randomItem(dailyGuidance);
     } else if (profile) {
       document.querySelector("#horoscope-sign").textContent = "✦ Update your chart for all three signs";
       document.querySelector("#horoscope-title").textContent = "Your latest chart placements are needed.";
@@ -118,7 +138,7 @@
       document.querySelector("#sun-reading").textContent = "Begin by checking in with what you need, rather than what you think you should need. One clear, kind choice can be enough to shift the tone of your day.";
       document.querySelector("#moon-reading").textContent = "Notice the feeling that needs a little space, and let yourself respond with care.";
       document.querySelector("#rising-reading").textContent = "Choose one small way to meet the day that feels true to you.";
-      document.querySelector("#daily-guidance").textContent = dailyGuidance[new Date().getDate() % dailyGuidance.length];
+      document.querySelector("#daily-guidance").textContent = randomItem(dailyGuidance);
     }
     const menuToggle = document.querySelector(".menu-toggle");
     const navLinks = document.querySelector(".nav-links");

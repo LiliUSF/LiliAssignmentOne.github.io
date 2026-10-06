@@ -17,7 +17,7 @@
     <nav class="nav wrap" aria-label="Main navigation">
       <a class="brand" href="index.html#home" aria-label="Lilis little sky home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a>
       <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span></button>
-      <div class="nav-links"><a href="index.html#daily-note">Daily note</a><a href="horoscope.html">Daily horoscope</a><a href="tarot.html">Tarot readings</a><a href="about.html" aria-current="page">About the chart</a></div>
+      <div class="nav-links"><a href="index.html#daily-note">Daily note</a><a href="horoscope.html">Daily horoscope</a><a href="tarot.html">Tarot readings</a><a href="oracle.html">Oracle</a><a href="manifestation.html">Manifestation</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html" aria-current="page">About the chart</a></div>
       <a class="nav-cta" href="index.html#welcome">Find your big three <span aria-hidden="true">✦</span></a>
     </nav>
   </header>
@@ -41,13 +41,14 @@
           <h2>Your details stay on your device</h2>
           <p>The birthplace text you enter is sent to Open-Meteo to search for location matches. Once you choose one, your birth date and time are combined with its coordinates and time zone in your browser. The resulting profile is stored in this browser’s local storage so your chart can appear next time. Lilis little sky does not send your birthday or birth time to a server.</p>
           <p>Anyone using this same browser profile may be able to see locally saved details. Use “Forget my chart” on the home page to remove them from this browser. Clearing site data in your browser also removes the saved profile.</p>
+          <p>If you ask the AI oracle a question, that question is sent to OpenAI through the site’s server to generate an answer. The site does not save the question or answer. Do not include sensitive personal information; OpenAI’s own service and data-handling policies apply to requests sent to its API.</p>
           <div class="privacy-note">A location lookup needs an internet connection. If it is unavailable, no chart is created until a location can be selected.</div>
         </section>
         <p><a class="page-button" href="index.html#welcome">Make your chart <span aria-hidden="true">↗</span></a></p>
       </article>
     </div>
   </main>
-  <footer><div class="footer-inner wrap"><a class="brand" href="index.html#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a><span>A cozy corner of the cosmos · <span id="year"></span></span><div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="about.html">Chart &amp; privacy</a></div></div></footer>
+  <footer><div class="footer-inner wrap"><a class="brand" href="index.html#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a><span>A cozy corner of the cosmos · <span id="year"></span></span><div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="oracle.html">Oracle</a><a href="manifestation.html">Manifestation</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">Chart &amp; privacy</a></div></div></footer>
   <script>
     document.querySelector("#year").textContent = new Date().getFullYear();
     const menuToggle = document.querySelector(".menu-toggle");

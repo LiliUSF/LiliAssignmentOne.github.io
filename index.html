@@ -329,7 +329,7 @@
     .star.s5, .star.s6 { color: #f8fbff; }
     .orbit-dot { background: #ffdb77; }
     .daily-note { padding: 0 0 81px; }
-    .next-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding-bottom: 80px; }
+    .next-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding-bottom: 80px; }
     .next-step-card { min-height: 101px; display: grid; align-content: center; gap: 8px; padding: 19px; border: 1px solid #d5e5f0; border-radius: 14px; background: #fffefa; box-shadow: 0 7px 18px #2945730a; transition: transform .2s, box-shadow .2s; }
     .next-step-card:hover { box-shadow: 0 11px 24px #29457320; transform: translateY(-2px); }
     .next-step-card span { color: #7085a0; font-size: 9px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
@@ -352,11 +352,12 @@
     .sparkle-trail { position: fixed; z-index: 1000; width: 18px; height: 18px; display: grid; place-items: center; color: #d0a33e; font-size: 16px; line-height: 1; pointer-events: none; text-shadow: 0 0 9px #f4d87e; animation: sparkle-drift .7s ease-out forwards; }
     @keyframes sparkle-drift { 0% { opacity: .95; transform: translate(-50%, -50%) scale(.35) rotate(0deg); } 40% { opacity: 1; transform: translate(-50%, -70%) scale(1.1) rotate(25deg); } 100% { opacity: 0; transform: translate(-50%, -115%) scale(.2) rotate(65deg); } }
     @media (max-width: 780px) {
-      .next-steps { grid-template-columns: 1fr; }
+      .next-steps { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 560px) {
       .planet-grid { grid-template-columns: repeat(2, 1fr); }
       .next-steps { padding-bottom: 58px; }
+      .next-steps { grid-template-columns: 1fr; }
       .planet-list-heading { font-size: 19px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -415,7 +416,10 @@
         <a href="#daily-note">Daily note</a>
         <a href="horoscope.html">Daily horoscope</a>
         <a href="tarot.html">Tarot readings</a>
+        <a href="manifestation.html">Manifestation</a>
+        <a href="angel-numbers.html">Angel numbers</a>
         <a href="about.html">About the chart</a>
+        <a href="oracle.html">Oracle</a>
       </div>
       <a class="nav-cta" href="#welcome">Find your big three <span aria-hidden="true">✦</span></a>
     </nav>
@@ -563,6 +567,7 @@
       <a class="next-step-card" href="horoscope.html"><span>Read your daily horoscope</span><strong>A little guidance, written in the stars ↗</strong></a>
       <a class="next-step-card" href="tarot.html"><span>Visit the tarot room</span><strong>Choose a spread and draw your cards ↗</strong></a>
       <a class="next-step-card" href="about.html"><span>Curious about your chart?</span><strong>See what each planet means ↗</strong></a>
+      <a class="next-step-card" href="oracle.html"><span>Ask Lili’s little oracle</span><strong>A magical 8-ball for your questions ↗</strong></a>
     </section>
 
     <section class="closing" id="about">
@@ -575,7 +580,7 @@
     <div class="footer-inner wrap">
       <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a>
       <span>A cozy corner of the cosmos · <span id="year"></span></span>
-    <div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="about.html">Chart &amp; privacy</a></div>
+    <div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="oracle.html">Oracle</a><a href="manifestation.html">Manifestation</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">Chart &amp; privacy</a></div>
     </div>
   </footer>
 
@@ -643,13 +648,17 @@
         quote: "Not all blooming makes a sound."
       }
     ];
+    function randomItem(items) {
+      return items[Math.floor(Math.random() * items.length)];
+    }
+
     function renderUniversalNote() {
       const now = new Date();
-      const dayIndex = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
-      const note = universalNotes[((dayIndex % universalNotes.length) + universalNotes.length) % universalNotes.length];
-      document.querySelector("#advice-title").textContent = note.adviceTitle;
-      document.querySelector("#advice-copy").textContent = note.advice;
-      document.querySelector("#daily-quote").textContent = `“${note.quote}”`;
+      const advice = randomItem(universalNotes);
+      const quote = randomItem(universalNotes);
+      document.querySelector("#advice-title").textContent = advice.adviceTitle;
+      document.querySelector("#advice-copy").textContent = advice.advice;
+      document.querySelector("#daily-quote").textContent = `“${quote.quote}”`;
       document.querySelector("#daily-note-date").textContent =
         new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" }).format(now);
     }
@@ -989,10 +998,6 @@
       };
     }
 
-    function getDateSeed(date) {
-      return Number(`${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, "0")}${String(date.getDate()).padStart(2, "0")}`);
-    }
-
     function renderProfile(profile) {
       const birthday = new Date(`${profile.birthDate}T12:00:00`);
       const placements = calculateSky(profile);
@@ -1007,41 +1012,22 @@
       }
       const signIndex = placements.sun;
       const sign = signs[signIndex];
-      const todayIndex = getDateSeed(new Date());
       const readingSet = horoscopeReadings[sign.element];
-      const dailyIndex = (todayIndex + signIndex) % readingSet.length;
-      const color = luckyColors[(todayIndex + signIndex * 2) % luckyColors.length];
+      const horoscope = randomItem(readingSet);
+      const color = randomItem(luckyColors);
       const name = profile.displayName.trim();
       const moonSign = signs[placements.moon];
       const risingSign = signs[placements.rising];
       const moonGuidance = [
         "Let your feelings have room without needing to act on every spark.",
-        "Return to what feels steady, comforting, and genuinely nourishing.",
-        "Talk it through, write it down, or let curiosity soften a fixed story.",
-        "Give yourself the care and quiet you so readily offer to others.",
-        "Let joy and warmth restore you, without needing anyone's applause.",
-        "Make space for feelings without turning them into another task to perfect.",
-        "Seek connection while staying honest about what you need.",
-        "Be patient with deeper feelings; clarity can arrive in its own time.",
-        "Find perspective through wonder, movement, or an open-minded conversation.",
-        "Let rest be part of the plan, not something you must earn.",
-        "Give your feelings fresh air and room to be different.",
-        "Use imagination gently, then ground yourself in one small comfort."
-      ][placements.moon];
+        "Give your inner weather a little space before choosing what to do.",
+        "Notice what your feelings are asking for, and answer with care rather than pressure."
+      ];
       const risingGuidance = [
-        "Meet the day with a brave first step and a little patience.",
-        "Choose a steady pace and make comfort part of your plan.",
-        "Ask a good question and stay open to an unexpected answer.",
-        "Lead with kindness while keeping a boundary that protects your energy.",
-        "Share your warmth generously, including with yourself.",
-        "Start with one useful detail instead of trying to solve everything.",
-        "Make things more harmonious through clear, kind honesty.",
-        "Look beneath the surface before deciding what comes next.",
-        "Follow what inspires you, then give it a practical next step.",
-        "Let consistency work for you, and leave a little space for rest.",
-        "Bring your original perspective while staying connected to others.",
-        "Trust your sensitivity and keep one foot in the present."
-      ][placements.rising];
+        "Meet the day in a way that feels true to you, one small choice at a time.",
+        "Let your first instinct open a door, then give yourself a moment to look around.",
+        "You can shape the tone of the day without needing to control every outcome."
+      ];
 
       document.querySelector("#greeting-name").textContent = name ? `${name}’s` : "Your";
       document.querySelector("#sun-placement").textContent = signs[placements.sun].name;
@@ -1112,14 +1098,13 @@
         houseGrid.append(chip);
       }
 
-      const horoscope = readingSet[dailyIndex];
       document.querySelector("#horoscope-title").textContent = horoscope[0];
       document.querySelector("#horoscope-copy").textContent =
-        `${horoscope[1]} ${moonSign.name} Moon: ${moonGuidance} ${risingSign.name} Rising: ${risingGuidance}`;
-      document.querySelector("#lucky-word").textContent = luckyWords[(todayIndex + signIndex * 3) % luckyWords.length];
+        `${horoscope[1]} ${moonSign.name} Moon: ${randomItem(moonGuidance)} ${risingSign.name} Rising: ${randomItem(risingGuidance)}`;
+      document.querySelector("#lucky-word").textContent = randomItem(luckyWords);
       document.querySelector("#lucky-color").textContent = color[0];
       document.querySelector("#lucky-color-dot").style.backgroundColor = color[1];
-      document.querySelector("#daily-energy").textContent = dailyEnergies[(todayIndex + signIndex * 5) % dailyEnergies.length];
+      document.querySelector("#daily-energy").textContent = randomItem(dailyEnergies);
       document.querySelector("#horoscope-date").textContent = `A little sky note for ${new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" }).format(new Date())}.`;
 
       document.querySelector(".dashboard").classList.add("is-visible");

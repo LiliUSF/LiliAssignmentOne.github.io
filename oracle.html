@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#263c60">
+  <meta name="description" content="Ask Lili's little AI-powered Magic 8-Ball for a kind, thoughtful perspective.">
+  <title>Ask the oracle — lilis little sky</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="pages.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="index.html#home" aria-label="Lilis little sky home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span></button>
+      <div class="nav-links"><a href="index.html#daily-note">Daily note</a><a href="horoscope.html">Daily horoscope</a><a href="tarot.html">Tarot readings</a><a href="oracle.html" aria-current="page">Oracle</a><a href="manifestation.html">Manifestation</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">About the chart</a></div>
+      <a class="nav-cta" href="index.html#welcome">Find your big three <span aria-hidden="true">✦</span></a>
+    </nav>
+  </header>
+  <main class="page-main">
+    <div class="wrap">
+      <header class="page-hero">
+        <span class="eyebrow">A little magic, a thoughtful answer</span>
+        <h1>Ask Lili’s little oracle.</h1>
+        <p>Bring a question you’ve been turning over. Your little genie will offer a warm perspective—not a prediction, and never a substitute for your own good judgment.</p>
+      </header>
+      <section class="page-panel oracle-panel" aria-label="Ask the advice genie">
+        <div class="oracle-layout">
+          <div class="oracle-genie-wrap">
+            <div class="oracle-genie" id="oracle-genie" role="img" aria-label="A friendly little smiling ghost floating among stars">
+              <span class="genie-sparkle sparkle-one" aria-hidden="true">✦</span>
+              <span class="genie-sparkle sparkle-two" aria-hidden="true">✧</span>
+              <span class="genie-sparkle sparkle-three" aria-hidden="true">✦</span>
+              <div class="genie-body">
+                <div class="genie-face" aria-hidden="true">
+                  <i class="genie-eye eye-left"></i>
+                  <i class="genie-eye eye-right"></i>
+                  <i class="genie-blush blush-left"></i>
+                  <i class="genie-blush blush-right"></i>
+                  <i class="genie-smile"></i>
+                </div>
+              </div>
+              <div class="genie-smoke" aria-hidden="true"></div>
+            </div>
+            <p class="oracle-genie-caption" id="oracle-status" aria-live="polite">Hi, I’m your genie!</p>
+          </div>
+          <div>
+            <form class="oracle-form" id="oracle-form">
+              <label for="oracle-question">What’s on your mind?</label>
+              <textarea class="oracle-question" id="oracle-question" name="question" maxlength="500" minlength="3" placeholder="Will taking a chance on something new feel right?" required></textarea>
+              <div class="oracle-suggestions" aria-label="Try asking">
+                <button class="oracle-suggestion" type="button" data-question="What small step might help me feel unstuck?">Help me feel unstuck</button>
+                <button class="oracle-suggestion" type="button" data-question="How can I be kinder to myself today?">A little self-kindness</button>
+                <button class="oracle-suggestion" type="button" data-question="What should I keep in mind before a big decision?">A big decision</button>
+              </div>
+              <button class="page-button oracle-submit" id="oracle-submit" type="submit">Ask your genie <span aria-hidden="true">✦</span></button>
+              <p class="oracle-message" id="oracle-message" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+        <div class="oracle-answer" id="oracle-answer" aria-live="polite"></div>
+        <p class="oracle-disclosure">AI by OpenAI · questions aren’t saved here · avoid sensitive details · reflection, not professional advice</p>
+      </section>
+    </div>
+  </main>
+  <footer><div class="footer-inner wrap"><a class="brand" href="index.html#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a><span>A cozy corner of the cosmos · <span id="year"></span></span><div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="oracle.html">Oracle</a><a href="manifestation.html">Manifestation</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">Chart &amp; privacy</a></div></div></footer>
+  <script>
+    const form = document.querySelector("#oracle-form");
+    const questionInput = document.querySelector("#oracle-question");
+    const submitButton = document.querySelector("#oracle-submit");
+    const message = document.querySelector("#oracle-message");
+    const answer = document.querySelector("#oracle-answer");
+    const genie = document.querySelector("#oracle-genie");
+    const oracleStatus = document.querySelector("#oracle-status");
+
+    document.querySelectorAll(".oracle-suggestion").forEach((button) => {
+      button.addEventListener("click", () => {
+        questionInput.value = button.dataset.question;
+        questionInput.focus();
+      });
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const question = questionInput.value.trim();
+      if (question.length < 3 || question.length > 500) {
+        message.textContent = "Please ask a question between 3 and 500 characters.";
+        return;
+      }
+      submitButton.disabled = true;
+      genie.classList.add("is-thinking");
+      oracleStatus.textContent = "Your genie is listening…";
+      answer.textContent = "";
+      message.textContent = "";
+      try {
+        const response = await fetch("/api/oracle", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ question })
+        });
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error || "The oracle could not answer just now. Please try again.");
+        }
+        if (typeof result.answer !== "string" || !result.answer.trim()) {
+          throw new Error("The oracle did not return an answer. Please try again.");
+        }
+        answer.textContent = result.answer.trim();
+        oracleStatus.textContent = "A little wisdom is ready ✦";
+      } catch (error) {
+        message.textContent = error.message ||
+          "The oracle is out of reach. Check your connection and try again.";
+        oracleStatus.textContent = "Ready when you are ✧";
+      } finally {
+        genie.classList.remove("is-thinking");
+        submitButton.disabled = false;
+      }
+    });
+
+    document.querySelector("#year").textContent = new Date().getFullYear();
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
+      navLinks.classList.toggle("is-open", !isOpen);
+    });
+  </script>
+</body>
+</html>
