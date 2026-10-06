@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#263c60">
-  <meta name="description" content="Ask Lili's little AI-powered Magic 8-Ball for a kind, thoughtful perspective.">
-  <title>Ask the oracle — lilis little sky</title>
+  <meta name="description" content="Ask Goasty, Lili's Little Sky's friendly magic 8 ghost, for a thoughtful reflection.">
+  <title>Goasty’s advice — lilis little sky</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -25,13 +25,13 @@
     <div class="wrap">
       <header class="page-hero">
         <span class="eyebrow">A little magic, a thoughtful answer</span>
-        <h1>Ask Lili’s little oracle.</h1>
-        <p>Bring a question you’ve been turning over. Your little genie will offer a warm perspective—not a prediction, and never a substitute for your own good judgment.</p>
+        <h1>Meet Goasty, your magic 8 ghost.</h1>
+        <p>Bring a question you’ve been turning over. Goasty will pick a warm reflection—not a prediction, and never a substitute for your own good judgment.</p>
       </header>
-      <section class="page-panel oracle-panel" aria-label="Ask the advice genie">
+      <section class="page-panel oracle-panel" aria-label="Get Goasty’s advice">
         <div class="oracle-layout">
           <div class="oracle-genie-wrap">
-            <div class="oracle-genie" id="oracle-genie" role="img" aria-label="A friendly little smiling ghost floating among stars">
+            <div class="oracle-genie" id="oracle-genie" role="img" aria-label="Goasty, a friendly smiling magic 8 ghost floating among stars">
               <span class="genie-sparkle sparkle-one" aria-hidden="true">✦</span>
               <span class="genie-sparkle sparkle-two" aria-hidden="true">✧</span>
               <span class="genie-sparkle sparkle-three" aria-hidden="true">✦</span>
@@ -46,7 +46,7 @@
               </div>
               <div class="genie-smoke" aria-hidden="true"></div>
             </div>
-            <p class="oracle-genie-caption" id="oracle-status" aria-live="polite">Hi, I’m your genie!</p>
+            <p class="oracle-genie-caption" id="oracle-status" aria-live="polite">Hi, I’m Goasty, your magic 8 ghost!</p>
           </div>
           <div>
             <form class="oracle-form" id="oracle-form">
@@ -57,7 +57,7 @@
                 <button class="oracle-suggestion" type="button" data-question="How can I be kinder to myself today?">A little self-kindness</button>
                 <button class="oracle-suggestion" type="button" data-question="What should I keep in mind before a big decision?">A big decision</button>
               </div>
-              <button class="page-button oracle-submit" id="oracle-submit" type="submit">Ask your genie <span aria-hidden="true">✦</span></button>
+              <button class="page-button oracle-submit" id="oracle-submit" type="submit">Get Goasty’s advice <span aria-hidden="true">✦</span></button>
               <p class="oracle-message" id="oracle-message" aria-live="polite"></p>
             </form>
           </div>
@@ -139,18 +139,18 @@
       }
       submitButton.disabled = true;
       genie.classList.add("is-thinking");
-      oracleStatus.textContent = "Your genie is listening…";
+      oracleStatus.textContent = "Goasty is thinking…";
       answer.textContent = "";
       message.textContent = "";
       try {
         const collection = adviceCollections.find((item) => item.matches.test(question));
         const replies = collection ? collection.replies : generalAdvice;
         answer.textContent = replies[Math.floor(Math.random() * replies.length)];
-        oracleStatus.textContent = "A little wisdom is ready ✦";
+        oracleStatus.textContent = "Goasty has a thought for you ✦";
       } catch (error) {
         console.error("Unable to prepare an oracle reflection:", error);
         message.textContent = "The oracle couldn’t find a reflection just now. Please try again.";
-        oracleStatus.textContent = "Ready when you are ✧";
+        oracleStatus.textContent = "Goasty will be here when you’re ready ✧";
       } finally {
         genie.classList.remove("is-thinking");
         submitButton.disabled = false;

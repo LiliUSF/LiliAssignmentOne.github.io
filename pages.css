@@ -33,7 +33,7 @@ footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
 .page-main { min-height: calc(100vh - 145px); padding: 66px 0 78px; }
 .page-hero { max-width: 740px; margin: 0 auto 34px; text-align: center; }
 .eyebrow { color: #7b6c42; font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
-.page-hero h1 { margin: 10px 0 10px; color: #20385e; font: 500 clamp(40px, 7vw, 62px)/.99 var(--page-serif); letter-spacing: -.035em; }
+.page-hero h1 { margin: 10px 0 10px; color: #20385e; font: 500 clamp(40px, 7vw, 62px)/.99 var(--page-serif); letter-spacing: -.035em; text-wrap: balance; }
 .page-hero p { max-width: 590px; margin: 0 auto; color: #667c96; font-size: 13px; line-height: 1.85; }
 .page-panel { padding: clamp(21px, 4vw, 36px); border: 1px solid #d7e5ef; border-radius: 18px; background: #fffefaed; box-shadow: 0 13px 35px #29457310; }
 .page-panel h2 { margin: 0 0 11px; color: #273e64; font: 500 29px/1.15 var(--page-serif); }
@@ -41,11 +41,7 @@ footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
 .page-panel p, .page-panel li { color: #667c96; font-size: 12px; line-height: 1.9; }
 .page-panel p:last-child { margin-bottom: 0; }
 .creator-section { display: grid; grid-template-columns: minmax(220px, .8fr) minmax(0, 1.4fr); align-items: center; gap: clamp(22px, 5vw, 54px); padding-bottom: 30px; border-bottom: 1px solid #e3eaf0; }
-.creator-photo-placeholder { min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px; padding: 24px; border: 1px dashed #b9c9df; border-radius: 16px; color: #5b7194; background: radial-gradient(circle at 50% 38%, #fffdf8 0, #f5f4ff 48%, #e9f1fb 100%); text-align: center; }
-.creator-photo-placeholder > span { width: 90px; height: 90px; display: grid; place-items: center; border: 1px solid #d9c681; border-radius: 50%; color: #bd9b4c; background: #fffbef; font-size: 35px; box-shadow: 0 8px 22px #29457314; }
-.creator-photo-placeholder strong { color: #294367; font: 600 23px/1.2 var(--page-serif); }
-.creator-photo-placeholder small { max-width: 220px; color: #72839a; font-size: 10px; line-height: 1.6; }
-.creator-photo { width: 100%; max-height: 390px; display: block; aspect-ratio: 4 / 5; border: 1px solid #d8e4ed; border-radius: 16px; object-fit: cover; box-shadow: 0 10px 27px #29457318; }
+.creator-photo { width: 100%; max-height: 430px; display: block; aspect-ratio: 3 / 4; border: 1px solid #d8e4ed; border-radius: 16px; object-fit: cover; object-position: center 42%; box-shadow: 0 10px 27px #29457318; }
 .creator-bio > .eyebrow { display: block; margin-bottom: 8px; }
 .creator-bio h2 { margin: 0 0 11px; color: #273e64; font: 500 32px/1.1 var(--page-serif); }
 .creator-bio > p { margin: 0 0 10px; }
@@ -53,16 +49,15 @@ footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
 .creator-photo-help > strong { color: #405a7a; font-size: 11px; }
 .creator-photo-help p { margin: 5px 0; font-size: 10px; line-height: 1.7; }
 .creator-photo-help code { padding: 2px 4px; border-radius: 4px; color: #4b5e7c; background: #e5edf7; font: 10px/1.5 Consolas, monospace; overflow-wrap: anywhere; }
-.creator-photo-help .creator-image-code { display: block; margin: 7px 0; padding: 8px; }
 .creator-journal-link { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 24px 0; border-bottom: 1px solid #e3eaf0; }
 .creator-journal-link h2 { margin: 0 0 4px; font-size: 25px; }
 .creator-journal-link p { margin: 0; }
-.journal-panel { max-width: 760px; margin: auto; }
+.journal-panel { width: 100%; max-width: 760px; margin: auto; }
 .journal-controls { display: flex; align-items: end; gap: 12px; margin-top: 21px; }
-.journal-controls label { display: grid; flex: 1; gap: 6px; color: #405a7a; font-size: 10px; font-weight: 800; }
-.journal-controls select { width: 100%; min-height: 41px; padding: 0 12px; border: 1px solid #d9e5ee; border-radius: 10px; color: #405a7a; background: #fbfdff; font: 11px var(--page-sans); }
+.journal-controls label { display: grid; flex: 1; min-width: 0; gap: 6px; color: #405a7a; font-size: 10px; font-weight: 800; }
+.journal-controls select { width: 100%; min-width: 0; min-height: 41px; padding: 0 12px; border: 1px solid #d9e5ee; border-radius: 10px; color: #405a7a; background: #fbfdff; font: 11px var(--page-sans); }
 .journal-controls select:focus-visible, .journal-controls button:focus-visible { outline: 3px solid #9db4d366; outline-offset: 2px; }
-.journal-prompt-card { min-height: 200px; display: flex; flex-direction: column; justify-content: center; margin-top: 20px; padding: clamp(22px, 5vw, 38px); border: 1px solid #e5dcbf; border-radius: 15px; background: radial-gradient(ellipse at top right, #fff7df 0, #fffefa 56%, #f5f7ff 100%); text-align: center; }
+.journal-prompt-card { min-height: 200px; display: flex; flex-direction: column; justify-content: center; margin-top: 20px; padding: clamp(22px, 5vw, 38px); border: 1px solid #e5dcbf; border-radius: 15px; background: radial-gradient(ellipse at top right, #fff7df 0, #fffefa 56%, #f5f7ff 100%); text-align: center; overflow-wrap: anywhere; }
 .journal-prompt-card .eyebrow { color: #92763a; }
 .journal-prompt-card p { margin: 12px 0 0; color: #344d70; font: 500 clamp(22px, 4vw, 31px)/1.5 var(--page-serif); }
 .journal-note { margin: 14px 0 0; color: #74849a !important; font-size: 10px !important; line-height: 1.7 !important; text-align: center; }
@@ -75,7 +70,7 @@ footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
 .horoscope-placement h3 { margin: 0 0 4px; color: #304b72; font: 700 10px var(--page-sans); letter-spacing: .06em; text-transform: uppercase; }
 .horoscope-placement p { margin: 0; color: #667c96; font-size: 12px; line-height: 1.85; }
 .horoscope-panel > p#daily-guidance { margin-top: 18px; color: #ad8740; font-weight: 700; }
-.horoscope-tip { margin-top: 22px; padding: 16px 18px; border-left: 2px solid #d0a33e; border-radius: 0 10px 10px 0; background: #f5f8fc; }
+.horoscope-tip { margin-top: 14px; padding: 8px 12px; border-left: 2px solid #d0a33e; border-radius: 0 8px 8px 0; background: #f5f8fc; font-size: 10px; line-height: 1.6; }
 .tarot-tools { max-width: 900px; margin: auto; }
 .spread-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0 9px; }
 .spread-option { padding: 15px 12px; border: 1px solid #d9e5ee; border-radius: 12px; color: #58708d; background: #f8fbff; text-align: left; cursor: pointer; }
@@ -186,10 +181,17 @@ footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
   .tarot-card:last-child:nth-child(odd) { grid-column: 1 / -1; width: 50%; justify-self: center; }
   .footer-inner { flex-wrap: wrap; }
   .creator-section { grid-template-columns: 1fr; }
-  .creator-photo-placeholder { min-height: 220px; }
   .creator-photo { max-width: 360px; margin-inline: auto; }
   .creator-journal-link { align-items: flex-start; flex-direction: column; }
   .journal-controls { align-items: stretch; flex-direction: column; }
+}
+@media (max-width: 900px) {
+  .nav { flex-wrap: wrap; gap: 10px; padding-block: 10px; }
+  .menu-toggle { width: 35px; height: 35px; display: grid; align-content: center; justify-items: center; gap: 5px; margin-left: auto; border: 1px solid #d6e4ed; border-radius: 50%; background: #fffefa; }
+  .menu-toggle span { width: 13px; height: 1px; background: #294367; }
+  .nav-links { order: 3; width: 100%; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 5px 0 3px; }
+  .nav-links.is-open { display: flex; }
+  .nav-links a { padding: 10px 5px; border-top: 1px solid #e4edf3; }
 }
 @media (max-width: 380px) {
   .nav-cta { padding-inline: 9px; }
