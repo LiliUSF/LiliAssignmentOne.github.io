@@ -3,42 +3,44 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#dff1ff">
+  <meta name="theme-color" content="#263c60">
   <meta name="description" content="Discover your zodiac sign, a little horoscope for today, and a tarot reading made just for you.">
-  <title>little star — your own little corner of the cosmos</title>
+  <title>lilis little sky — your own little corner of the cosmos</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,30,1;1,9..144,400..700,30,1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="pages.css">
+  <script src="site.js" defer></script>
   <style>
     :root {
-      --sky: #eaf6ff;
-      --sky-deep: #cbe8ff;
-      --sky-wash: #f6fbff;
-      --blue: #4d78a8;
-      --blue-dark: #263c60;
-      --blue-soft: #819bb7;
+      --sky: #d6eaff;
+      --sky-deep: #aacbf0;
+      --sky-wash: #eff6ff;
+      --blue: #426fa6;
+      --blue-dark: #1c3156;
+      --blue-soft: #6e88a9;
       --gold: #f0c65b;
       --gold-pale: #fff1bd;
-      --ink: #243754;
-      --muted: #71839a;
+      --ink: #1d304e;
+      --muted: #647994;
       --white: #fffefa;
       --line: #d9e8f2;
-      --serif: "Fraunces", Georgia, serif;
-      --sans: "DM Sans", Arial, sans-serif;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "Nunito", Arial, sans-serif;
       --hand: "Caveat", cursive;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-    body { margin: 0; color: var(--ink); background: var(--sky-wash); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
-    body::before { position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(#80a9ca30 .8px, transparent .8px); background-size: 24px 24px; content: ""; pointer-events: none; }
+    body { margin: 0; color: var(--ink); background: linear-gradient(155deg, #edf6ff 0%, #e4efff 38%, #f5f8ff 68%, #e2f1ff 100%); background-attachment: fixed; font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    body::before { position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(#5481b52e .8px, transparent .8px); background-size: 24px 24px; content: ""; pointer-events: none; }
     a { color: inherit; text-decoration: none; }
     button, input, select { font: inherit; }
     button, a, input, select { -webkit-tap-highlight-color: transparent; }
     button { color: inherit; }
     .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-    .topbar { height: 76px; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #d8e7f1; background: #f6fbffeF; backdrop-filter: blur(14px); }
+    .topbar { height: 76px; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #b9cfe5; background: #e9f2ffeF; backdrop-filter: blur(14px); }
     .nav { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
     .brand { display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; }
     .brand-mark { width: 37px; height: 37px; display: grid; place-items: center; border: 1px solid #ead28c; border-radius: 50%; color: #9e782b; background: #fff7db; font-size: 21px; }
@@ -62,11 +64,11 @@
     .button-outline:hover { background: white; }
     .hero-note { margin-top: 18px; color: var(--blue-soft); font: 19px var(--hand); }
     .hero-art { min-height: 440px; display: grid; place-items: center; position: relative; }
-    .moon-scene { width: min(420px, 100%); aspect-ratio: 1; position: relative; display: grid; place-items: center; overflow: hidden; border: 1px solid #b6d4e6; border-radius: 50%; background: radial-gradient(circle at 49% 46%, #f9fcff 0, #e3f2ff 52%, #cfe7f6 100%); box-shadow: inset 0 0 50px #fff, 0 18px 45px #829fbb1a; }
+    .moon-scene { width: min(420px, 100%); aspect-ratio: 1; position: relative; display: grid; place-items: center; overflow: hidden; border: 1px solid #b6d4e6; border-radius: 50%; background: radial-gradient(circle at 49% 46%, #607fbb 0, #344f86 52%, #1b2c51 100%); box-shadow: inset 0 0 50px #c1d8ff20, 0 18px 45px #1c31564d; }
     .moon-orbit { position: absolute; width: 74%; height: 74%; border: 1px dashed #a3bfd3; border-radius: 50%; transform: rotate(-28deg); }
     .moon-orbit.orbit-two { width: 89%; height: 89%; border-color: #ffffffc9; transform: rotate(26deg); }
-    .crescent { position: relative; width: 150px; height: 150px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 45px #f0c65b68, 0 0 100px #f0c65b36; }
-    .crescent::after { position: absolute; top: -16px; left: 45px; width: 143px; height: 143px; border-radius: 50%; background: #e7f4ff; content: ""; }
+    .crescent { position: relative; color: var(--gold); font-size: 172px; line-height: .9; text-shadow: 0 0 28px #f0c65b68, 0 0 74px #f0c65b36; }
+    .crescent::after { content: none; }
     .star { position: absolute; color: #e1b448; text-shadow: 0 0 12px #fff4cc; animation: twinkle 3s ease-in-out infinite alternate; }
     .star.s1 { top: 16%; left: 31%; font-size: 24px; }
     .star.s2 { top: 34%; right: 16%; font-size: 16px; animation-delay: .9s; }
@@ -201,8 +203,6 @@
       h1 { max-width: 450px; margin-top: 14px; font-size: clamp(48px, 14vw, 66px); }
       .hero-copy { font-size: 12px; }
       .hero-art { width: min(355px, 100%); min-height: 0; aspect-ratio: 1; align-self: center; margin-top: 13px; }
-      .crescent { width: 36%; height: auto; aspect-ratio: 1; }
-      .crescent::after { top: -10%; left: 30%; width: 96%; height: 96%; }
       .art-label { right: -4px; bottom: 15px; }
       .welcome { padding-bottom: 62px; }
       .welcome-card { grid-template-columns: 1fr; }
@@ -276,11 +276,9 @@
     .zodiac-wheel { background: repeating-conic-gradient(from -15deg, #edf6fd 0deg 29deg, #deeffa 30deg 30.8deg); }
     .wheel-center { width: 47%; }
     .placements-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
-    .placement-tab { min-width: 0; display: grid; gap: 5px; padding: 10px 7px; border: 1px solid #e4edf3; border-radius: 11px; background: #fbfdff; text-align: center; cursor: pointer; }
-    .placement-tab:hover { border-color: #c5dbe8; background: #f3f9fd; }
-    .placement-tab.is-active { border-color: #d8bd70; background: #fff7dd; box-shadow: 0 3px 12px #d8bd701e; }
-    .placement-tab span { color: #8495a8; font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
-    .placement-tab strong { overflow: hidden; color: var(--blue-dark); font: 500 14px var(--serif); text-overflow: ellipsis; }
+    .placement-stat { min-width: 0; display: grid; gap: 5px; padding: 10px 7px; border: 1px solid #e4edf3; border-radius: 11px; background: #fbfdff; text-align: center; }
+    .placement-stat span { color: #8495a8; font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    .placement-stat strong { overflow: hidden; color: var(--blue-dark); font: 500 14px var(--serif); text-overflow: ellipsis; }
     .placement-note { min-height: 32px; margin: 10px 0 0; color: #71839a; font-size: 10px; line-height: 1.65; }
     .tarot-section { position: relative; overflow: hidden; }
     .tarot-section::before { position: absolute; top: 23px; right: 7%; color: #d8b75e; content: "✧"; font-size: 40px; }
@@ -305,30 +303,119 @@
       .hero-content h1 { font-size: clamp(44px, 12vw, 58px); }
       .moon-scene::before { width: 58px; height: 58px; }
       .moon-scene::after { width: 39px; height: 39px; }
+      .crescent { font-size: clamp(135px, 43vw, 165px); }
       .chart-panel { border-radius: 42% 17px 17px; }
       .reading-panel { border-radius: 17px 32px 17px 17px; }
       .welcome-copy::after { right: 15px; bottom: -4px; font-size: 47px; }
-      .placement-tab { padding-inline: 4px; }
-      .placement-tab strong { font-size: 12px; }
+      .placement-stat { padding-inline: 4px; }
+      .placement-stat strong { font-size: 12px; }
       .closing::before { left: 7%; }
       .closing::after { right: 7%; }
+    }
+    .brand-name { font-family: var(--serif); }
+    .hero-content h1, .welcome-copy h2, .dashboard-top h2, .section-heading h2, .reading-panel h3, .form-heading, .spread-picker h3 {
+      font-family: var(--serif);
+    }
+    .hero-content { background: linear-gradient(140deg, #fdfdffeb 0%, #e7f0ffdc 100%); }
+    .hero-content h1 em { color: #426fa6; }
+    .moon-scene {
+      background: radial-gradient(circle at 35% 28%, #556fa8 0%, #334b7c 43%, #1a2b50 100%);
+      box-shadow: inset 0 0 68px #b8d6ff1c, 0 18px 45px #1c31564d;
+    }
+    .moon-scene::after { background: #3c5688; }
+    .moon-orbit { border-color: #d0e4ff80; }
+    .moon-orbit.orbit-two { border-color: #dce9ff85; }
+    .star { color: #ffdc7c; text-shadow: 0 0 13px #ffdf867d; }
+    .star.s5, .star.s6 { color: #f8fbff; }
+    .orbit-dot { background: #ffdb77; }
+    .daily-note { padding: 0 0 81px; }
+    .next-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding-bottom: 80px; }
+    .next-step-card { min-height: 101px; display: grid; align-content: center; gap: 8px; padding: 19px; border: 1px solid #d5e5f0; border-radius: 14px; background: #fffefa; box-shadow: 0 7px 18px #2945730a; transition: transform .2s, box-shadow .2s; }
+    .next-step-card:hover { box-shadow: 0 11px 24px #29457320; transform: translateY(-2px); }
+    .next-step-card span { color: #7085a0; font-size: 9px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    .next-step-card strong { color: #263d64; font: 500 20px/1.2 var(--serif); }
+    .planet-list-heading { display: flex; justify-content: space-between; margin: 19px 0 10px; color: #263d64; font: 500 21px var(--serif); }
+    .planet-list-heading span { color: #c4993f; }
+    .planet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+    .planet-chip { min-width: 0; padding: 8px; border: 1px solid #e4edf3; border-radius: 9px; background: #fbfdff; }
+    .planet-chip span { display: block; overflow: hidden; margin-bottom: 3px; color: #8092a6; font-size: 8px; font-weight: 700; letter-spacing: .07em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+    .planet-chip strong { display: block; overflow: hidden; color: #263d64; font: 500 15px var(--serif); text-overflow: ellipsis; white-space: nowrap; }
+    .reading-link { align-self: flex-start; margin-top: 13px; color: #365d8a; font-size: 10px; font-weight: 800; }
+    .reading-link:hover { color: #a27a2e; }
+    .location-field { grid-column: 1 / -1; }
+    .field select { width: 100%; height: 42px; margin-top: 8px; padding: 0 12px; border: 1px solid #dce8ef; border-radius: 9px; outline: none; color: var(--ink); background: #fcfdff; font-size: 11px; }
+    .field select:disabled { color: #8898aa; background: #f4f7fa; }
+    .field-hint a, .chart-note a { color: #426fa6; text-decoration: underline; text-underline-offset: 2px; }
+    .field-hint a:hover, .chart-note a:hover { color: #a27a2e; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 14px; color: #61758e; }
+    .footer-links a:hover { color: #a27a2e; }
+    .sparkle-trail { position: fixed; z-index: 1000; width: 18px; height: 18px; display: grid; place-items: center; color: #d0a33e; font-size: 16px; line-height: 1; pointer-events: none; text-shadow: 0 0 9px #f4d87e; animation: sparkle-drift .7s ease-out forwards; }
+    @keyframes sparkle-drift { 0% { opacity: .95; transform: translate(-50%, -50%) scale(.35) rotate(0deg); } 40% { opacity: 1; transform: translate(-50%, -70%) scale(1.1) rotate(25deg); } 100% { opacity: 0; transform: translate(-50%, -115%) scale(.2) rotate(65deg); } }
+    @media (max-width: 780px) {
+      .next-steps { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .planet-grid { grid-template-columns: repeat(2, 1fr); }
+      .next-steps { padding-bottom: 58px; }
+      .planet-list-heading { font-size: 19px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sparkle-trail { display: none; }
+    }
+    .daily-note-heading { position: relative; margin-bottom: 20px; }
+    .daily-note-heading h2 { margin: 8px 0 4px; color: #20375d; font: 500 clamp(29px, 3.8vw, 40px)/1.15 var(--serif); }
+    .daily-note-heading > p { margin: 0; color: #7287a2; font-size: 10px; }
+    .daily-note-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .universal-card { min-height: 205px; position: relative; overflow: hidden; padding: 24px 27px; border: 1px solid #ffffff99; border-radius: 18px 6px 18px 18px; box-shadow: 0 12px 30px #15294b16; }
+    .advice-card { color: #f8f7ff; background: linear-gradient(130deg, #466da5 0%, #334b7e 52%, #26375f 100%); }
+    .advice-card::after { position: absolute; right: -8px; bottom: -35px; color: #ffffff10; content: "✧"; font-size: 162px; line-height: 1; }
+    .quote-card { color: #f9f5e9; background: linear-gradient(130deg, #344b78 0%, #23365c 52%, #182846 100%); }
+    .quote-card::after { position: absolute; right: 22px; bottom: -15px; color: #f4d77c29; content: "✦"; font-size: 93px; line-height: 1; transform: rotate(-12deg); }
+    .universal-card-icon { position: absolute; top: 17px; right: 19px; color: #ffdc7c; font: 23px var(--serif); }
+    .quote-card .universal-card-icon { top: 6px; right: 18px; font-size: 66px; opacity: .45; }
+    .universal-label { display: block; margin-bottom: 14px; color: #f5da91; font-size: 9px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    .universal-card h3 { position: relative; z-index: 1; max-width: 410px; margin: 0 0 8px; color: #fffefa; font: 500 26px/1.16 var(--serif); }
+    .universal-card > p { position: relative; z-index: 1; max-width: 460px; margin: 0; color: #e0e9f7; font-size: 11px; line-height: 1.85; }
+    .quote-card blockquote { position: relative; z-index: 1; max-width: 450px; margin: 1px 0 14px; color: #fffefa; font: italic 500 clamp(21px, 2.5vw, 29px)/1.35 var(--serif); }
+    .quote-attribution { position: relative; z-index: 1; color: #d5dced; font: 16px var(--hand); }
+    .daily-note-heading .eyebrow { color: #41668f; }
+    .daily-note-heading .eyebrow::before { content: "✦"; }
+    .tarot-section { background: linear-gradient(160deg, #294573 0%, #21375f 45%, #172947 100%); }
+    .tarot-section .section-heading h2 { color: #fffefa; }
+    .tarot-section .section-heading p { color: #cfdbec; }
+    .tarot-section .eyebrow { color: #f3d47a; }
+    .tarot-section::before { color: #f3d47a70; }
+    .tarot-note { color: #c6d3e6; }
+    .quote-card .quote-attribution { letter-spacing: .02em; }
+    @media (max-width: 780px) {
+      .daily-note { padding-bottom: 66px; }
+      .universal-card { min-height: 220px; padding: 21px; }
+      .universal-card h3 { font-size: 23px; }
+    }
+    @media (max-width: 560px) {
+      .daily-note { padding-bottom: 55px; }
+      .daily-note-grid { grid-template-columns: 1fr; gap: 11px; }
+      .universal-card { min-height: 0; padding: 21px 20px; }
+      .universal-card h3 { max-width: 330px; font-size: 25px; }
+      .quote-card blockquote { font-size: 24px; }
     }
   </style>
 </head>
 <body>
   <header class="topbar">
     <nav class="nav wrap" aria-label="Main navigation">
-      <a class="brand" href="#home" aria-label="Little star home">
+      <a class="brand" href="#home" aria-label="Lilis little sky home">
         <span class="brand-mark" aria-hidden="true">✦</span>
-        <span class="brand-name">little star</span>
+        <span class="brand-name">lilis little sky</span>
       </a>
       <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
         <span></span><span></span>
       </button>
       <div class="nav-links">
-        <a href="#chart">Your sky</a>
-        <a href="#tarot">Tarot readings</a>
-        <a href="#about">A little reminder</a>
+        <a href="#daily-note">Daily note</a>
+        <a href="horoscope.html">Daily horoscope</a>
+        <a href="tarot.html">Tarot readings</a>
+        <a href="about.html">About the chart</a>
       </div>
       <a class="nav-cta" href="#welcome">Find your big three <span aria-hidden="true">✦</span></a>
     </nav>
@@ -342,15 +429,16 @@
         <p class="hero-copy">Find your place among the stars. Meet your zodiac sign, read your horoscope for today, and pull a few cards whenever you need a moment of magic.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#welcome">Discover my star sign <span aria-hidden="true">→</span></a>
-          <a class="button button-outline" href="#tarot">Explore tarot <span aria-hidden="true">✧</span></a>
+          <a class="button button-outline" href="tarot.html">Explore tarot <span aria-hidden="true">✧</span></a>
         </div>
         <p class="hero-note">Come as you are. The stars are happy you’re here. <span aria-hidden="true">♡</span></p>
+        <p class="hero-note"><a href="horoscope.html">Meet your horoscope of the day <span aria-hidden="true">↗</span></a></p>
       </div>
       <div class="hero-art" aria-label="A crescent moon floating among golden stars">
         <div class="moon-scene">
           <div class="moon-orbit"></div>
           <div class="moon-orbit orbit-two"></div>
-          <div class="crescent" aria-hidden="true"></div>
+          <div class="crescent" aria-hidden="true">☾</div>
           <span class="star s1" aria-hidden="true">✦</span>
           <span class="star s2" aria-hidden="true">✧</span>
           <span class="star s3" aria-hidden="true">✦</span>
@@ -363,12 +451,34 @@
       </div>
     </section>
 
+    <section class="daily-note wrap" id="daily-note" aria-labelledby="daily-note-heading">
+      <div class="daily-note-heading">
+        <span class="eyebrow">A little note for everyone</span>
+        <h2 id="daily-note-heading">Today, beneath the same sky.</h2>
+        <p id="daily-note-date"></p>
+      </div>
+      <div class="daily-note-grid">
+        <article class="universal-card advice-card">
+          <div class="universal-card-icon" aria-hidden="true">✧</div>
+          <span class="universal-label">A little advice for today</span>
+          <h3 id="advice-title"></h3>
+          <p id="advice-copy"></p>
+        </article>
+        <article class="universal-card quote-card">
+          <div class="universal-card-icon" aria-hidden="true">“</div>
+          <span class="universal-label">A thought to carry with you</span>
+          <blockquote id="daily-quote"></blockquote>
+          <span class="quote-attribution">a little reminder from the universe</span>
+        </article>
+      </div>
+    </section>
+
     <section class="welcome wrap" id="welcome">
       <div class="welcome-card">
         <div class="welcome-copy">
           <span class="eyebrow">Your story in the stars</span>
           <h2>Let’s find your little corner of the cosmos.</h2>
-          <p>Birth time and coordinates unlock your Sun, Moon, and rising signs. Everything is calculated on this device; your birth details never leave this browser.</p>
+          <p>Share your birthplace and birth time for your Sun, Moon, rising sign, and planetary placements. We look up your birthplace to find its coordinates and time zone; your exact birth details stay on this device.</p>
         </div>
         <form class="birth-form" id="birth-form">
           <h3 class="form-heading">A few details about you</h3>
@@ -386,20 +496,14 @@
               <input id="birth-time" name="birthTime" type="time" required>
               <p class="field-hint">Use your local clock time. Required for Moon and rising signs.</p>
             </div>
-            <div class="field">
-              <label for="birth-latitude">Birth latitude <span aria-hidden="true">*</span></label>
-              <input id="birth-latitude" name="birthLatitude" type="number" min="-90" max="90" step="any" placeholder="e.g. 40.7128" required>
-              <p class="field-hint">Latitude is north (+) or south (−). Find the coordinates in your map app.</p>
-            </div>
-            <div class="field">
-              <label for="birth-longitude">Birth longitude <span aria-hidden="true">*</span></label>
-              <input id="birth-longitude" name="birthLongitude" type="number" min="-180" max="180" step="any" placeholder="e.g. -74.0060" required>
-              <p class="field-hint">Longitude is east (+) or west (−), in decimal degrees.</p>
-            </div>
-            <div class="field">
-              <label for="utc-offset">UTC offset on your birthday <span aria-hidden="true">*</span></label>
-              <input id="utc-offset" name="utcOffset" type="number" min="-12" max="14" step="0.25" placeholder="e.g. -4" required>
-              <p class="field-hint">Hours from UTC on your birth date, including daylight saving (New York summer: −4).</p>
+            <div class="field location-field">
+              <label for="birth-location-query">Birthplace <span aria-hidden="true">*</span></label>
+              <input id="birth-location-query" name="birthplace" type="search" minlength="2" maxlength="90" placeholder="City, region or country" autocomplete="off" required>
+              <label class="sr-only" for="birth-location-match">Choose the matching birthplace</label>
+              <select id="birth-location-match" name="locationMatch" required disabled>
+                <option value="">Search for a city above to see matches</option>
+              </select>
+              <p class="field-hint">We use Open-Meteo to find the city’s coordinates and time zone. <a href="about.html#privacy">See how your information is used.</a></p>
             </div>
           </div>
           <button class="button button-primary form-submit" type="submit">Plot my whole sky <span aria-hidden="true">✦</span></button>
@@ -426,20 +530,19 @@
               <div class="wheel-caption" id="sign-dates">September 23 – October 22</div>
             </div>
           </div>
-          <div class="placements-three" role="tablist" aria-label="Your Sun, Moon, and rising signs">
-            <button class="placement-tab is-active" id="sun-tab" type="button" role="tab" aria-selected="true" aria-controls="placement-note" data-placement="sun">
-              <span>☼ Sun</span><strong id="sun-placement">Libra</strong>
-            </button>
-            <button class="placement-tab" id="moon-tab" type="button" role="tab" aria-selected="false" aria-controls="placement-note" data-placement="moon">
-              <span>☾ Moon</span><strong id="moon-placement">Pisces</strong>
-            </button>
-            <button class="placement-tab" id="rising-tab" type="button" role="tab" aria-selected="false" aria-controls="placement-note" data-placement="rising">
-              <span>↗ Rising</span><strong id="rising-placement">Gemini</strong>
-            </button>
+          <div class="placements-three" aria-label="Your Sun, Moon, and rising signs">
+            <div class="placement-stat"><span>☼ Sun</span><strong id="sun-placement">Libra</strong></div>
+            <div class="placement-stat"><span>☾ Moon</span><strong id="moon-placement">Pisces</strong></div>
+            <div class="placement-stat"><span>↗ Rising</span><strong id="rising-placement">Gemini</strong></div>
           </div>
-          <p class="placement-note" id="placement-note" role="tabpanel" tabindex="0" aria-live="polite">Your Sun is your central self: the light you grow into.</p>
+          <p class="placement-note" id="placement-note">Your Sun is your central self: the light you grow into.</p>
+          <h3 class="planet-list-heading">The rest of your sky <span>✧</span></h3>
+          <div class="planet-grid" id="planet-grid" aria-label="Planetary sign placements"></div>
+          <h3 class="planet-list-heading">Your whole-sign houses <span>✧</span></h3>
+          <div class="planet-grid" id="house-grid" aria-label="Whole-sign house placements"></div>
+          <p class="chart-note">House signs start from your Rising sign using the whole-sign house system; no house cusps or degrees are calculated.</p>
           <p class="chart-note" id="birth-summary"></p>
-          <p class="chart-note">Calculated on this device with a tropical-sky astronomy approximation. The Moon can change signs within a day; near boundaries, compare an ephemeris. Rising signs are sensitive to birth time, coordinates, and daylight-saving offset.</p>
+          <p class="chart-note">Tropical planetary positions use Astronomy Engine; the North Node and whole-sign houses are estimates. <a href="about.html#chart-method">How this chart works</a>.</p>
         </article>
         <article class="panel reading-panel">
           <span class="greeting">Your horoscope for today ✦</span>
@@ -451,37 +554,15 @@
             <div class="daily-detail"><span>Today’s energy</span><strong id="daily-energy">Gentle</strong></div>
           </div>
           <p class="chart-note" id="horoscope-date"></p>
+          <a class="reading-link" href="horoscope.html">Read your full daily horoscope <span aria-hidden="true">↗</span></a>
         </article>
       </div>
     </section>
 
-    <section class="tarot-section" id="tarot">
-      <div class="wrap">
-        <div class="section-heading">
-          <div><span class="eyebrow">A moment with the cards</span><h2>What would you like a little guidance on?</h2></div>
-          <p>Take a breath, hold a question in mind, and choose a spread. The cards are here as prompts for reflection.</p>
-        </div>
-        <div class="tarot-layout">
-          <aside class="panel spread-picker">
-            <h3>Choose your spread</h3>
-            <div class="spread-options" role="group" aria-label="Choose a tarot spread">
-              <button class="spread-option is-selected" type="button" data-spread="one" aria-pressed="true"><span class="spread-icon">✦</span><span>One card</span></button>
-              <button class="spread-option" type="button" data-spread="three" aria-pressed="false"><span class="spread-icon">✧</span><span>Three cards</span></button>
-              <button class="spread-option" type="button" data-spread="five" aria-pressed="false"><span class="spread-icon">☼</span><span>Five cards</span></button>
-            </div>
-            <p class="spread-description" id="spread-description">A small message for the energy around you today.</p>
-            <button class="button button-primary draw-button" type="button" id="draw-cards">Draw my cards <span aria-hidden="true">→</span></button>
-          </aside>
-          <div class="panel tarot-table" id="tarot-table" aria-live="polite">
-            <div class="tarot-empty">
-              <span class="tarot-empty-icon" aria-hidden="true">✧</span>
-              <strong>Your cards are waiting.</strong>
-              <p>Settle into a quiet moment and draw whenever you feel ready. There’s no wrong question to ask.</p>
-            </div>
-          </div>
-        </div>
-        <p class="tarot-note">Tarot is a tool for reflection and storytelling, not a prediction or replacement for professional advice.</p>
-      </div>
+    <section class="next-steps wrap">
+      <a class="next-step-card" href="horoscope.html"><span>Read your daily horoscope</span><strong>A little guidance, written in the stars ↗</strong></a>
+      <a class="next-step-card" href="tarot.html"><span>Visit the tarot room</span><strong>Choose a spread and draw your cards ↗</strong></a>
+      <a class="next-step-card" href="about.html"><span>Curious about your chart?</span><strong>See what each planet means ↗</strong></a>
     </section>
 
     <section class="closing" id="about">
@@ -492,13 +573,89 @@
 
   <footer>
     <div class="footer-inner wrap">
-      <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">little star</span></a>
+      <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a>
       <span>A cozy corner of the cosmos · <span id="year"></span></span>
-      <span>For reflection, wonder, and fun ♡</span>
+    <div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="about.html">Chart &amp; privacy</a></div>
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
   <script>
+    const universalNotes = [
+      {
+        adviceTitle: "Take the next small step.",
+        advice: "You do not need a perfect plan for the whole journey. Choose one kind, doable thing you can do today, and let that be enough for now.",
+        quote: "You are allowed to grow at your own pace."
+      },
+      {
+        adviceTitle: "Make a little room to breathe.",
+        advice: "Before you answer the next thing asking for your attention, take one slow breath. A little pause can help you hear what you actually need.",
+        quote: "Even the sky makes room for quiet."
+      },
+      {
+        adviceTitle: "Notice what is already working.",
+        advice: "Look for one thing you handled, one person who showed up, or one small comfort you can return to. The good does not have to be grand to count.",
+        quote: "Small lights still make a constellation."
+      },
+      {
+        adviceTitle: "Let yourself begin again.",
+        advice: "You can change your mind, adjust the plan, or start over without calling it failure. Today is a new page, not a test of yesterday.",
+        quote: "There is more than one way to find your way."
+      },
+      {
+        adviceTitle: "Be on your own side.",
+        advice: "Talk to yourself with the same patience you would offer someone you love. You deserve kindness while you are still figuring things out.",
+        quote: "Becoming is a lovely place to be."
+      },
+      {
+        adviceTitle: "Follow one thing that feels curious.",
+        advice: "Give a little attention to a question, idea, or place that makes you wonder. Not every interest has to turn into a plan to be worth following.",
+        quote: "Wonder is a compass with a soft voice."
+      },
+      {
+        adviceTitle: "Keep one promise to yourself.",
+        advice: "Choose a promise small enough to keep today: drink some water, step outside, or rest when you need it. Trust grows through little acts of care.",
+        quote: "You can be a safe place for yourself."
+      },
+      {
+        adviceTitle: "You can set something down.",
+        advice: "Not every thought needs an answer this very minute. Name what can wait, and give your energy back to the thing right in front of you.",
+        quote: "The stars do not hurry to be bright."
+      },
+      {
+        adviceTitle: "Let joy be useful, too.",
+        advice: "Make a little space for something that is simply fun. Rest and delight are not rewards you have to earn; they help refill your light.",
+        quote: "A little joy is a way of finding your way home."
+      },
+      {
+        adviceTitle: "Ask for the kind of help you need.",
+        advice: "You do not have to carry every question alone. A clear ask, a trusted person, or an honest conversation can make the next step feel less heavy.",
+        quote: "You were never meant to be your only source of light."
+      },
+      {
+        adviceTitle: "Let today be a little imperfect.",
+        advice: "Try the version you can manage, not the version that only exists in your imagination. Done gently is still done, and progress can be soft.",
+        quote: "A crooked path can still lead somewhere beautiful."
+      },
+      {
+        adviceTitle: "Celebrate the quiet progress.",
+        advice: "Some growth is hard to see while it is happening. Notice how you respond, what you understand now, or what you have made a little easier.",
+        quote: "Not all blooming makes a sound."
+      }
+    ];
+    function renderUniversalNote() {
+      const now = new Date();
+      const dayIndex = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+      const note = universalNotes[((dayIndex % universalNotes.length) + universalNotes.length) % universalNotes.length];
+      document.querySelector("#advice-title").textContent = note.adviceTitle;
+      document.querySelector("#advice-copy").textContent = note.advice;
+      document.querySelector("#daily-quote").textContent = `“${note.quote}”`;
+      document.querySelector("#daily-note-date").textContent =
+        new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" }).format(now);
+    }
+
+    renderUniversalNote();
+
     const signs = [
       { name: "Aries", glyph: "♈", start: [3, 21], end: [4, 19], element: "Fire", quality: "Cardinal" },
       { name: "Taurus", glyph: "♉", start: [4, 20], end: [5, 20], element: "Earth", quality: "Fixed" },
@@ -618,12 +775,16 @@
     const profileKey = "little-star-profile";
     const birthForm = document.querySelector("#birth-form");
     const birthDateInput = document.querySelector("#birth-date");
+    const birthplaceQuery = document.querySelector("#birth-location-query");
+    const birthplaceMatch = document.querySelector("#birth-location-match");
+    const locationResults = new Map();
+    let selectedLocation = null;
+    let locationSearchTimer = 0;
+    let locationSearchController = null;
     const today = new Date();
     const todayLocal = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
     birthDateInput.min = "1900-01-01";
     birthDateInput.max = "2100-12-31" < todayLocal ? "2100-12-31" : todayLocal;
-    document.querySelector("#birth-latitude").min = "-89.9";
-    document.querySelector("#birth-latitude").max = "89.9";
 
     function normalizeDegrees(degrees) {
       return ((degrees % 360) + 360) % 360;
@@ -637,103 +798,194 @@
       if (!profile || typeof profile.birthDate !== "string" ||
           !/^\d{4}-\d{2}-\d{2}$/.test(profile.birthDate) ||
           typeof profile.birthTime !== "string" ||
-          !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(profile.birthTime)) {
+          !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(profile.birthTime) ||
+          typeof profile.timeZone !== "string" ||
+          typeof profile.locationName !== "string" ||
+          typeof profile.displayName !== "string" ||
+          typeof profile.birthInstant !== "string" ||
+          !Number.isFinite(Date.parse(profile.birthInstant))) {
         return false;
       }
       const [year, month, day] = profile.birthDate.split("-").map(Number);
       const checkDate = new Date(Date.UTC(year, month - 1, day)).toISOString().slice(0, 10);
       const latitude = Number(profile.latitude);
       const longitude = Number(profile.longitude);
-      const offset = Number(profile.utcOffset);
+      try {
+        new Intl.DateTimeFormat("en-US", { timeZone: profile.timeZone }).format(new Date());
+      } catch {
+        return false;
+      }
       return checkDate === profile.birthDate &&
         profile.birthDate >= birthDateInput.min &&
         profile.birthDate <= birthDateInput.max &&
-        Number.isFinite(latitude) && Math.abs(latitude) < 89.9 &&
-        Number.isFinite(longitude) && Math.abs(longitude) <= 180 &&
-        Number.isFinite(offset) && offset >= -12 && offset <= 14 &&
-        Math.abs(offset * 4 - Math.round(offset * 4)) < 1e-8;
+        Number.isFinite(latitude) && Math.abs(latitude) < 90 &&
+        Number.isFinite(longitude) && Math.abs(longitude) <= 180;
+    }
+
+    function getLocalBirthInstant(dateValue, timeValue, timeZone) {
+      const [year, month, day] = dateValue.split("-").map(Number);
+      const [hour, minute] = timeValue.split(":").map(Number);
+      const intendedLocalAsUtc = Date.UTC(year, month - 1, day, hour, minute);
+      const formatter = new Intl.DateTimeFormat("en-CA", {
+        timeZone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hourCycle: "h23"
+      });
+      let utcMilliseconds = intendedLocalAsUtc;
+      for (let attempt = 0; attempt < 4; attempt += 1) {
+        const parts = Object.fromEntries(
+          formatter.formatToParts(new Date(utcMilliseconds))
+            .filter((part) => part.type !== "literal")
+            .map((part) => [part.type, Number(part.value)])
+        );
+        const representedLocalAsUtc = Date.UTC(
+          parts.year, parts.month - 1, parts.day, parts.hour, parts.minute
+        );
+        utcMilliseconds += intendedLocalAsUtc - representedLocalAsUtc;
+      }
+      const verifiedParts = Object.fromEntries(
+        formatter.formatToParts(new Date(utcMilliseconds))
+          .filter((part) => part.type !== "literal")
+          .map((part) => [part.type, Number(part.value)])
+      );
+      if (verifiedParts.year !== year || verifiedParts.month !== month ||
+          verifiedParts.day !== day || verifiedParts.hour !== hour ||
+          verifiedParts.minute !== minute) {
+        throw new Error("That local birth time does not exist in this time zone because the clocks changed. Check the time and try again.");
+      }
+      const possibleOffsets = new Set();
+      for (let sample = -48; sample <= 48; sample += 6) {
+        const sampleDate = new Date(utcMilliseconds + sample * 3600000);
+        const sampledParts = Object.fromEntries(
+          formatter.formatToParts(sampleDate)
+            .filter((part) => part.type !== "literal")
+            .map((part) => [part.type, Number(part.value)])
+        );
+        const representedSample = Date.UTC(
+          sampledParts.year, sampledParts.month - 1, sampledParts.day,
+          sampledParts.hour, sampledParts.minute
+        );
+        possibleOffsets.add((representedSample - sampleDate.getTime()) / 3600000);
+      }
+      const matchingInstants = [...possibleOffsets]
+        .map((offset) => intendedLocalAsUtc - offset * 3600000)
+        .filter((instant) => {
+          const candidate = Object.fromEntries(
+            formatter.formatToParts(new Date(instant))
+              .filter((part) => part.type !== "literal")
+              .map((part) => [part.type, Number(part.value)])
+          );
+          return candidate.year === year && candidate.month === month &&
+            candidate.day === day && candidate.hour === hour && candidate.minute === minute;
+        });
+      if (matchingInstants.length > 1) {
+        throw new Error("That local birth time happened twice because the clocks changed. Please check a birth certificate or choose the intended time.");
+      }
+      return utcMilliseconds;
     }
 
     function calculateSky(profile) {
-      const [year, month, day] = profile.birthDate.split("-").map(Number);
-      const [hour, minute] = profile.birthTime.split(":").map(Number);
-      const offset = Number(profile.utcOffset);
       const latitude = Number(profile.latitude);
       const longitude = Number(profile.longitude);
-      const utcMilliseconds = Date.UTC(year, month - 1, day, hour, minute) - offset * 60 * 60 * 1000;
-      const julianDay = utcMilliseconds / 86400000 + 2440587.5;
-      const daysSinceEpoch = julianDay - 2451543.5;
+      const birthDate = new Date(profile.birthInstant);
+      if (!Number.isFinite(birthDate.getTime())) {
+        throw new Error("The saved birth time is invalid. Please enter your birth details again.");
+      }
+      if (!window.Astronomy) {
+        throw new Error("The chart engine could not load. Check your internet connection and try again.");
+      }
+      const astronomy = window.Astronomy;
       const radians = Math.PI / 180;
-      const sine = (degrees) => Math.sin(degrees * radians);
-      const cosine = (degrees) => Math.cos(degrees * radians);
-
-      const sunMeanAnomaly = normalizeDegrees(356.047 + 0.9856002585 * daysSinceEpoch);
-      const sunLongitude = normalizeDegrees(
-        280.460 + 0.9856474 * daysSinceEpoch +
-        1.915 * sine(sunMeanAnomaly) +
-        0.020 * sine(2 * sunMeanAnomaly)
+      const geocentricLongitude = (body) => astronomy.Ecliptic(
+        astronomy.GeoVector(body, birthDate, true)
+      ).elon;
+      const planetaryLongitudes = Object.fromEntries(
+        ["Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"]
+          .map((body) => [
+            body.toLowerCase(),
+            signFromLongitude(geocentricLongitude(astronomy.Body[body]))
+          ])
       );
-
+      const sunLongitude = geocentricLongitude(astronomy.Body.Sun);
+      const moonLongitude = astronomy.EclipticGeoMoon(birthDate).lon;
+      const julianDay = birthDate.getTime() / 86400000 + 2440587.5;
+      const daysSinceEpoch = julianDay - 2451543.5;
       const ascendingNode = normalizeDegrees(125.1228 - 0.0529538083 * daysSinceEpoch);
-      const inclination = 5.1454;
-      const periapsis = normalizeDegrees(318.0634 + 0.1643573223 * daysSinceEpoch);
-      const eccentricity = 0.0549;
-      const moonMeanAnomaly = normalizeDegrees(115.3654 + 13.0649929509 * daysSinceEpoch);
-      const eccentricAnomaly = moonMeanAnomaly +
-        eccentricity * (180 / Math.PI) * sine(moonMeanAnomaly) *
-        (1 + eccentricity * cosine(moonMeanAnomaly));
-      const moonX = cosine(eccentricAnomaly) - eccentricity;
-      const moonY = Math.sqrt(1 - eccentricity * eccentricity) * sine(eccentricAnomaly);
-      const trueAnomaly = Math.atan2(moonY, moonX) / radians;
-      const moonDistance = Math.hypot(moonX, moonY);
-      const argument = (trueAnomaly + periapsis) * radians;
-      const eclipticX = moonDistance *
-        (cosine(ascendingNode) * Math.cos(argument) -
-          sine(ascendingNode) * Math.sin(argument) * Math.cos(inclination));
-      const eclipticY = moonDistance *
-        (sine(ascendingNode) * Math.cos(argument) +
-          cosine(ascendingNode) * Math.sin(argument) * Math.cos(inclination));
-      const meanMoonLongitude = normalizeDegrees(ascendingNode + periapsis + moonMeanAnomaly);
-      const elongation = normalizeDegrees(meanMoonLongitude - (sunMeanAnomaly + 280.460 + 0.9856474 * daysSinceEpoch));
-      const argumentOfLatitude = normalizeDegrees(meanMoonLongitude - ascendingNode);
-      const moonLongitude = normalizeDegrees(
-        Math.atan2(eclipticY, eclipticX) / radians -
-        1.274 * sine(moonMeanAnomaly - 2 * elongation) +
-        0.658 * sine(2 * elongation) -
-        0.186 * sine(sunMeanAnomaly) -
-        0.059 * sine(2 * moonMeanAnomaly - 2 * elongation) -
-        0.057 * sine(moonMeanAnomaly - 2 * elongation + sunMeanAnomaly) +
-        0.053 * sine(moonMeanAnomaly + 2 * elongation) +
-        0.046 * sine(2 * elongation - sunMeanAnomaly) +
-        0.041 * sine(moonMeanAnomaly - sunMeanAnomaly) -
-        0.035 * sine(elongation) -
-        0.031 * sine(moonMeanAnomaly + sunMeanAnomaly) -
-        0.015 * sine(2 * argumentOfLatitude - 2 * elongation) +
-        0.011 * sine(moonMeanAnomaly - 4 * elongation)
-      );
-
       const centuries = (julianDay - 2451545) / 36525;
-      const greenwichSiderealTime = normalizeDegrees(
-        280.46061837 +
-        360.98564736629 * (julianDay - 2451545) +
-        0.000387933 * centuries * centuries -
-        centuries * centuries * centuries / 38710000
-      );
       const obliquity = (23.439291 - 0.0130042 * centuries) * radians;
-      const localSiderealAngle = normalizeDegrees(greenwichSiderealTime + longitude) * radians;
+      const localSiderealAngle = normalizeDegrees(
+        astronomy.SiderealTime(birthDate) * 15 + longitude
+      ) * radians;
       const latitudeRadians = latitude * radians;
-      const ascendantLongitude = normalizeDegrees(
+      function horizonAltitude(longitudeDegrees) {
+        const eclipticLongitude = longitudeDegrees * radians;
+        const rightAscension = Math.atan2(
+          Math.cos(obliquity) * Math.sin(eclipticLongitude),
+          Math.cos(eclipticLongitude)
+        );
+        const declination = Math.asin(
+          Math.sin(obliquity) * Math.sin(eclipticLongitude)
+        );
+        const hourAngle = localSiderealAngle - rightAscension;
+        return Math.sin(latitudeRadians) * Math.sin(declination) +
+          Math.cos(latitudeRadians) * Math.cos(declination) * Math.cos(hourAngle);
+      }
+      let previousLongitude = 0;
+      let previousAltitude = horizonAltitude(previousLongitude);
+      let ascendantLongitude = null;
+      for (let step = 1; step <= 360; step += 1) {
+        const currentAltitude = horizonAltitude(step);
+        if (previousAltitude * currentAltitude < 0) {
+          let low = previousLongitude;
+          let high = step;
+          let lowAltitude = previousAltitude;
+          for (let iteration = 0; iteration < 32; iteration += 1) {
+            const middle = (low + high) / 2;
+            const middleAltitude = horizonAltitude(middle);
+            if (lowAltitude * middleAltitude <= 0) high = middle;
+            else {
+              low = middle;
+              lowAltitude = middleAltitude;
+            }
+          }
+          const candidate = (low + high) / 2;
+          const eclipticLongitude = candidate * radians;
+          const rightAscension = Math.atan2(
+            Math.cos(obliquity) * Math.sin(eclipticLongitude),
+            Math.cos(eclipticLongitude)
+          );
+          const hourAngle = normalizeDegrees(
+            (localSiderealAngle - rightAscension) / radians
+          );
+          if (hourAngle > 180) {
+            ascendantLongitude = normalizeDegrees(candidate);
+            break;
+          }
+        }
+        previousLongitude = step;
+        previousAltitude = currentAltitude;
+      }
+      if (ascendantLongitude === null) {
+        throw new Error("The rising sign could not be calculated for this birthplace. Check the location and birth time.");
+      }
+      const midheavenLongitude = normalizeDegrees(
         Math.atan2(
-          Math.cos(localSiderealAngle),
-          -(Math.sin(localSiderealAngle) * Math.cos(obliquity) +
-            Math.tan(latitudeRadians) * Math.sin(obliquity))
+          Math.sin(localSiderealAngle),
+          Math.cos(localSiderealAngle) * Math.cos(obliquity)
         ) / radians
       );
 
       return {
         sun: signFromLongitude(sunLongitude),
         moon: signFromLongitude(moonLongitude),
-        rising: signFromLongitude(ascendantLongitude)
+        rising: signFromLongitude(ascendantLongitude),
+        midheaven: signFromLongitude(midheavenLongitude),
+        northnode: signFromLongitude(ascendingNode),
+        ...planetaryLongitudes
       };
     }
 
@@ -744,6 +996,15 @@
     function renderProfile(profile) {
       const birthday = new Date(`${profile.birthDate}T12:00:00`);
       const placements = calculateSky(profile);
+      profile.sunSign = placements.sun;
+      profile.moonSign = placements.moon;
+      profile.risingSign = placements.rising;
+      let profileSaveMessage = "";
+      try {
+        localStorage.setItem(profileKey, JSON.stringify(profile));
+      } catch {
+        profileSaveMessage = "Your chart is shown, but this browser could not save the updated placements.";
+      }
       const signIndex = placements.sun;
       const sign = signs[signIndex];
       const todayIndex = getDateSeed(new Date());
@@ -751,13 +1012,43 @@
       const dailyIndex = (todayIndex + signIndex) % readingSet.length;
       const color = luckyColors[(todayIndex + signIndex * 2) % luckyColors.length];
       const name = profile.displayName.trim();
+      const moonSign = signs[placements.moon];
+      const risingSign = signs[placements.rising];
+      const moonGuidance = [
+        "Let your feelings have room without needing to act on every spark.",
+        "Return to what feels steady, comforting, and genuinely nourishing.",
+        "Talk it through, write it down, or let curiosity soften a fixed story.",
+        "Give yourself the care and quiet you so readily offer to others.",
+        "Let joy and warmth restore you, without needing anyone's applause.",
+        "Make space for feelings without turning them into another task to perfect.",
+        "Seek connection while staying honest about what you need.",
+        "Be patient with deeper feelings; clarity can arrive in its own time.",
+        "Find perspective through wonder, movement, or an open-minded conversation.",
+        "Let rest be part of the plan, not something you must earn.",
+        "Give your feelings fresh air and room to be different.",
+        "Use imagination gently, then ground yourself in one small comfort."
+      ][placements.moon];
+      const risingGuidance = [
+        "Meet the day with a brave first step and a little patience.",
+        "Choose a steady pace and make comfort part of your plan.",
+        "Ask a good question and stay open to an unexpected answer.",
+        "Lead with kindness while keeping a boundary that protects your energy.",
+        "Share your warmth generously, including with yourself.",
+        "Start with one useful detail instead of trying to solve everything.",
+        "Make things more harmonious through clear, kind honesty.",
+        "Look beneath the surface before deciding what comes next.",
+        "Follow what inspires you, then give it a practical next step.",
+        "Let consistency work for you, and leave a little space for rest.",
+        "Bring your original perspective while staying connected to others.",
+        "Trust your sensitivity and keep one foot in the present."
+      ][placements.rising];
 
       document.querySelector("#greeting-name").textContent = name ? `${name}’s` : "Your";
       document.querySelector("#sun-placement").textContent = signs[placements.sun].name;
       document.querySelector("#moon-placement").textContent = signs[placements.moon].name;
       document.querySelector("#rising-placement").textContent = signs[placements.rising].name;
       document.querySelector("#birth-summary").textContent =
-        `Born ${new Intl.DateTimeFormat(undefined, { month: "long", day: "numeric", year: "numeric" }).format(birthday)} at ${profile.birthTime} · ${Number(profile.latitude).toFixed(2)}°, ${Number(profile.longitude).toFixed(2)}° · UTC${Number(profile.utcOffset) >= 0 ? "+" : ""}${profile.utcOffset}.`;
+        `Born ${new Intl.DateTimeFormat(undefined, { month: "long", day: "numeric", year: "numeric" }).format(birthday)} at ${profile.birthTime} · ${profile.locationName} (${profile.timeZone}).`;
 
       const wheel = document.querySelector("#zodiac-wheel");
       wheel.querySelectorAll(".sign-label").forEach((label) => label.remove());
@@ -774,50 +1065,65 @@
       });
       wheel.setAttribute("aria-label", `Tropical zodiac wheel. ${signs[placements.sun].name} Sun, ${signs[placements.moon].name} Moon, and ${signs[placements.rising].name} rising.`);
 
-      const placementDetails = {
-        sun: "Your Sun is your central self: the light you grow into.",
-        moon: "Your Moon speaks to your inner world, needs, and emotional rhythms.",
-        rising: "Your rising sign is the horizon at your first breath: how you meet the world."
-      };
-      function showPlacement(kind) {
-        const index = placements[kind];
-        const placementSign = signs[index];
-        document.querySelector("#sign-glyph").textContent = placementSign.glyph;
-        document.querySelector("#sign-name").textContent = placementSign.name;
-        document.querySelector("#sign-dates").textContent = `${signDates[index]} · ${placementSign.element}`;
-        document.querySelector("#zodiac-wheel").setAttribute(
-          "aria-label",
-          `Tropical zodiac wheel. ${placementSign.name} ${kind === "rising" ? "rising" : kind}.`
-        );
-        document.querySelector("#zodiac-wheel").querySelectorAll(".sign-label").forEach((label, labelIndex) => {
-          label.classList.toggle("active", labelIndex === index);
-        });
-        document.querySelector("#placement-note").textContent = `${placementSign.name} ${kind === "rising" ? "Rising" : kind[0].toUpperCase() + kind.slice(1)} · ${placementDetails[kind]}`;
-        document.querySelectorAll(".placement-tab").forEach((tab) => {
-          const selected = tab.dataset.placement === kind;
-          tab.classList.toggle("is-active", selected);
-          tab.setAttribute("aria-selected", String(selected));
-          if (selected) {
-            document.querySelector("#placement-note").setAttribute("aria-labelledby", tab.id);
-          }
-        });
-      }
-      document.querySelectorAll(".placement-tab").forEach((tab) => {
-        tab.onclick = () => showPlacement(tab.dataset.placement);
+      document.querySelector("#sign-glyph").textContent = sign.glyph;
+      document.querySelector("#sign-name").textContent = sign.name;
+      document.querySelector("#sign-dates").textContent = `${signDates[signIndex]} · tropical`;
+      wheel.querySelectorAll(".sign-label").forEach((label, index) => {
+        label.classList.toggle("active", index === signIndex);
       });
-      showPlacement("sun");
+      document.querySelector("#placement-note").textContent =
+        `${sign.name} Sun · ${signs[placements.moon].name} Moon · ${signs[placements.rising].name} Rising`;
+      const planetNames = [
+        ["Mercury", "How you think and communicate"],
+        ["Venus", "What you love and value"],
+        ["Mars", "How you act and pursue"],
+        ["Jupiter", "Where you grow and find meaning"],
+        ["Saturn", "How you build and take responsibility"],
+        ["Uranus", "Where you seek freedom and change"],
+        ["Neptune", "Your dreams and imagination"],
+        ["Pluto", "Deep change and renewal"],
+        ["North Node", "A symbolic direction for growth"],
+        ["Midheaven", "Public path and vocation"]
+      ];
+      const planetGrid = document.querySelector("#planet-grid");
+      planetGrid.replaceChildren();
+      planetNames.forEach(([name, meaning]) => {
+        const chip = document.createElement("div");
+        chip.className = "planet-chip";
+        chip.title = meaning;
+        const label = document.createElement("span");
+        label.textContent = name;
+        const value = document.createElement("strong");
+        value.textContent = signs[placements[name.toLowerCase().replace(/\s/g, "")]].name;
+        chip.append(label, value);
+        planetGrid.append(chip);
+      });
+      const houseGrid = document.querySelector("#house-grid");
+      houseGrid.replaceChildren();
+      for (let house = 1; house <= 12; house += 1) {
+        const chip = document.createElement("div");
+        chip.className = "planet-chip";
+        chip.title = `Whole-sign house ${house}`;
+        const label = document.createElement("span");
+        label.textContent = `House ${house}`;
+        const value = document.createElement("strong");
+        value.textContent = signs[(placements.rising + house - 1) % signs.length].name;
+        chip.append(label, value);
+        houseGrid.append(chip);
+      }
 
       const horoscope = readingSet[dailyIndex];
       document.querySelector("#horoscope-title").textContent = horoscope[0];
-      document.querySelector("#horoscope-copy").textContent = horoscope[1];
+      document.querySelector("#horoscope-copy").textContent =
+        `${horoscope[1]} ${moonSign.name} Moon: ${moonGuidance} ${risingSign.name} Rising: ${risingGuidance}`;
       document.querySelector("#lucky-word").textContent = luckyWords[(todayIndex + signIndex * 3) % luckyWords.length];
       document.querySelector("#lucky-color").textContent = color[0];
       document.querySelector("#lucky-color-dot").style.backgroundColor = color[1];
       document.querySelector("#daily-energy").textContent = dailyEnergies[(todayIndex + signIndex * 5) % dailyEnergies.length];
-      document.querySelector("#horoscope-date").textContent = `A little star note for ${new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" }).format(new Date())}.`;
+      document.querySelector("#horoscope-date").textContent = `A little sky note for ${new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" }).format(new Date())}.`;
 
       document.querySelector(".dashboard").classList.add("is-visible");
-      document.querySelector("#form-message").textContent = "";
+      document.querySelector("#form-message").textContent = profileSaveMessage;
     }
 
     function saveAndShowProfile(profile) {
@@ -830,30 +1136,111 @@
       document.querySelector("#chart").scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    birthForm.addEventListener("submit", (event) => {
+    birthplaceQuery.addEventListener("input", () => {
+      selectedLocation = null;
+      locationResults.clear();
+      birthplaceMatch.replaceChildren(new Option("Searching for a city…", ""));
+      birthplaceMatch.disabled = true;
+      window.clearTimeout(locationSearchTimer);
+      if (locationSearchController) locationSearchController.abort();
+      const query = birthplaceQuery.value.trim();
+      if (query.length < 2) {
+        birthplaceMatch.replaceChildren(new Option("Enter at least 2 letters to search", ""));
+        return;
+      }
+      locationSearchTimer = window.setTimeout(async () => {
+        locationSearchController = new AbortController();
+        try {
+          const url = new URL("https://geocoding-api.open-meteo.com/v1/search");
+          url.search = new URLSearchParams({
+            name: query,
+            count: "8",
+            language: "en",
+            format: "json"
+          });
+          const response = await fetch(url, { signal: locationSearchController.signal });
+          if (!response.ok) throw new Error("The birthplace lookup service is unavailable. Please try again in a moment.");
+          const result = await response.json();
+          const matches = Array.isArray(result.results) ? result.results : [];
+          if (!matches.length) {
+            birthplaceMatch.replaceChildren(new Option("No matches found — try a nearby city", ""));
+            return;
+          }
+          birthplaceMatch.replaceChildren(new Option("Choose your birthplace…", ""));
+          matches.forEach((place, index) => {
+            if (!Number.isFinite(place.latitude) || !Number.isFinite(place.longitude) ||
+                typeof place.timezone !== "string") return;
+            const locationName = [place.name, place.admin1, place.country]
+              .filter((part, partIndex, allParts) => part && allParts.indexOf(part) === partIndex)
+              .join(", ");
+            locationResults.set(String(index), {
+              latitude: place.latitude,
+              longitude: place.longitude,
+              timeZone: place.timezone,
+              locationName
+            });
+            const option = new Option(`${locationName} · ${place.timezone}`, String(index));
+            birthplaceMatch.add(option);
+          });
+          if (!locationResults.size) {
+            birthplaceMatch.replaceChildren(new Option("No usable location matches — try another city", ""));
+            return;
+          }
+          birthplaceMatch.disabled = false;
+        } catch (error) {
+          if (error.name === "AbortError") return;
+          birthplaceMatch.replaceChildren(new Option("Location search failed — please try again", ""));
+          document.querySelector("#form-message").textContent =
+            error.message || "We could not look up that birthplace. Please check your connection and try again.";
+        }
+      }, 300);
+    });
+
+    birthplaceMatch.addEventListener("change", () => {
+      selectedLocation = locationResults.get(birthplaceMatch.value) || null;
+      document.querySelector("#form-message").textContent = "";
+    });
+
+    birthForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (!birthForm.reportValidity()) return;
       const birthDate = birthDateInput.value;
-      const latitude = Number(document.querySelector("#birth-latitude").value);
-      const longitude = Number(document.querySelector("#birth-longitude").value);
-      const utcOffset = Number(document.querySelector("#utc-offset").value);
-      if (!birthDate || birthDate > todayLocal || !Number.isFinite(latitude) ||
-          !Number.isFinite(longitude) || !Number.isFinite(utcOffset) ||
-          Math.abs(latitude) >= 89.9 || Math.abs(longitude) > 180 ||
-          utcOffset < -12 || utcOffset > 14 ||
-          Math.abs(utcOffset * 4 - Math.round(utcOffset * 4)) >= 1e-8 ||
+      if (!birthDate || birthDate > todayLocal || !selectedLocation ||
           !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(document.querySelector("#birth-time").value)) {
-        document.querySelector("#form-message").textContent = "Please check your birthday, coordinates, and UTC offset, then try again.";
+        document.querySelector("#form-message").textContent = "Please choose your birthplace from the search results and check your birth details.";
         return;
       }
-      const profile = {
-        displayName: document.querySelector("#display-name").value.trim(),
-        birthDate,
-        birthTime: document.querySelector("#birth-time").value,
-        latitude,
-        longitude,
-        utcOffset
-      };
+      const submitButton = birthForm.querySelector("[type='submit']");
+      submitButton.disabled = true;
+      document.querySelector("#form-message").textContent = "Finding the exact sky at your birth time…";
+      let profile;
+      try {
+        const birthInstant = getLocalBirthInstant(
+          birthDate,
+          document.querySelector("#birth-time").value,
+          selectedLocation.timeZone
+        );
+        profile = {
+          displayName: document.querySelector("#display-name").value.trim(),
+          birthDate,
+          birthTime: document.querySelector("#birth-time").value,
+          latitude: selectedLocation.latitude,
+          longitude: selectedLocation.longitude,
+          birthInstant: new Date(birthInstant).toISOString(),
+          timeZone: selectedLocation.timeZone,
+          locationName: selectedLocation.locationName
+        };
+        const placements = calculateSky(profile);
+        profile.sunSign = placements.sun;
+        profile.moonSign = placements.moon;
+        profile.risingSign = placements.rising;
+      } catch (error) {
+        document.querySelector("#form-message").textContent =
+          error.message || "We could not calculate this chart. Please review your birth details.";
+        submitButton.disabled = false;
+        return;
+      }
+      submitButton.disabled = false;
       saveAndShowProfile(profile);
     });
 
@@ -870,25 +1257,13 @@
         return;
       }
       birthForm.reset();
+      selectedLocation = null;
+      locationResults.clear();
+      birthplaceMatch.disabled = true;
+      birthplaceMatch.replaceChildren(new Option("Search for a city above to see matches", ""));
       document.querySelector(".dashboard").classList.remove("is-visible");
       document.querySelector("#welcome").scrollIntoView({ behavior: "smooth", block: "center" });
       document.querySelector("#birth-date").focus({ preventScroll: true });
-    });
-
-    document.querySelectorAll(".placement-tab").forEach((tab) => {
-      tab.addEventListener("keydown", (event) => {
-        const tabs = [...document.querySelectorAll(".placement-tab")];
-        const currentIndex = tabs.indexOf(tab);
-        const nextIndex = event.key === "ArrowRight" ? (currentIndex + 1) % tabs.length :
-          event.key === "ArrowLeft" ? (currentIndex - 1 + tabs.length) % tabs.length :
-          event.key === "Home" ? 0 :
-          event.key === "End" ? tabs.length - 1 : -1;
-        if (nextIndex >= 0) {
-          event.preventDefault();
-          tabs[nextIndex].focus();
-          tabs[nextIndex].click();
-        }
-      });
     });
 
     try {
@@ -899,69 +1274,26 @@
           document.querySelector("#display-name").value = typeof profile.displayName === "string" ? profile.displayName : "";
           birthDateInput.value = profile.birthDate;
           document.querySelector("#birth-time").value = typeof profile.birthTime === "string" ? profile.birthTime : "";
-          document.querySelector("#birth-latitude").value = profile.latitude;
-          document.querySelector("#birth-longitude").value = profile.longitude;
-          document.querySelector("#utc-offset").value = profile.utcOffset;
+          birthplaceQuery.value = profile.locationName;
+          selectedLocation = {
+            latitude: Number(profile.latitude),
+            longitude: Number(profile.longitude),
+            timeZone: profile.timeZone,
+            locationName: profile.locationName
+          };
+          locationResults.set("saved", selectedLocation);
+          birthplaceMatch.replaceChildren(new Option(`${profile.locationName} · ${profile.timeZone}`, "saved"));
+          birthplaceMatch.value = "saved";
+          birthplaceMatch.disabled = false;
           renderProfile(profile);
         } else {
           localStorage.removeItem(profileKey);
         }
       }
-    } catch {
-      document.querySelector("#form-message").textContent = "Your saved details could not be read. You can enter your birthday again.";
+    } catch (error) {
+      document.querySelector("#form-message").textContent =
+        error.message || "Your saved chart could not be read. You can enter your birthday again.";
     }
-
-    let selectedSpread = "one";
-    document.querySelectorAll(".spread-option").forEach((button) => {
-      button.addEventListener("click", () => {
-        selectedSpread = button.dataset.spread;
-        document.querySelectorAll(".spread-option").forEach((option) => {
-          const selected = option === button;
-          option.classList.toggle("is-selected", selected);
-          option.setAttribute("aria-pressed", String(selected));
-        });
-        document.querySelector("#spread-description").textContent = spreads[selectedSpread].description;
-      });
-    });
-
-    document.querySelector("#draw-cards").addEventListener("click", () => {
-      const spread = spreads[selectedSpread];
-      const drawPile = [...tarotDeck];
-      const drawn = [];
-      for (let index = 0; index < spread.count; index += 1) {
-        const drawIndex = Math.floor(Math.random() * drawPile.length);
-        drawn.push(drawPile.splice(drawIndex, 1)[0]);
-      }
-      const table = document.querySelector("#tarot-table");
-      const cards = document.createElement("div");
-      cards.className = "tarot-cards";
-      drawn.forEach((card, index) => {
-        const article = document.createElement("article");
-        article.className = "tarot-card";
-        const face = document.createElement("div");
-        face.className = "card-face";
-        const inner = document.createElement("div");
-        inner.className = "card-inner";
-        const glyph = document.createElement("span");
-        glyph.className = "card-glyph";
-        glyph.setAttribute("aria-hidden", "true");
-        glyph.textContent = card.glyph;
-        const name = document.createElement("strong");
-        name.className = "card-name";
-        name.textContent = card.name;
-        inner.append(glyph, name);
-        face.append(inner);
-        const position = document.createElement("p");
-        position.className = "card-position";
-        position.textContent = spread.positions[index];
-        const reading = document.createElement("p");
-        reading.className = "card-reading";
-        reading.textContent = card.meaning;
-        article.append(face, position, reading);
-        cards.append(article);
-      });
-      table.replaceChildren(cards);
-    });
 
     document.querySelector("#year").textContent = new Date().getFullYear();
   </script>

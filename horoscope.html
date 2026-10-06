@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#263c60">
+  <meta name="description" content="A gentle daily horoscope guided by your Sun, Moon, and Rising signs.">
+  <title>Today’s horoscope — lilis little sky</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="pages.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="index.html#home" aria-label="Lilis little sky home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span></button>
+      <div class="nav-links"><a href="index.html#daily-note">Daily note</a><a href="horoscope.html" aria-current="page">Daily horoscope</a><a href="tarot.html">Tarot readings</a><a href="about.html">About the chart</a></div>
+      <a class="nav-cta" href="index.html#welcome">Find your big three <span aria-hidden="true">✦</span></a>
+    </nav>
+  </header>
+  <main class="page-main">
+    <div class="wrap">
+      <header class="page-hero">
+        <span class="eyebrow">A little guidance for the day</span>
+        <h1>Your whole-sky horoscope.</h1>
+        <p>Your Sun, Moon, and Rising each add a different note. Read them together as a gentle prompt for reflection; keep what feels useful and leave the rest.</p>
+      </header>
+      <article class="page-panel horoscope-panel">
+        <p class="horoscope-date" id="horoscope-date"></p>
+        <span class="horoscope-sign" id="horoscope-sign">✦ Your Sun · Moon · Rising</span>
+        <h2 id="horoscope-title">A little space to listen.</h2>
+        <section class="horoscope-placement" aria-labelledby="sun-reading-heading">
+          <h3 id="sun-reading-heading">☼ Sun · your focus</h3>
+          <p id="sun-reading">Begin by checking in with what you need, rather than what you think you should need. One clear, kind choice can be enough to shift the tone of your day.</p>
+        </section>
+        <section class="horoscope-placement" aria-labelledby="moon-reading-heading">
+          <h3 id="moon-reading-heading">☾ Moon · your inner weather</h3>
+          <p id="moon-reading"></p>
+        </section>
+        <section class="horoscope-placement" aria-labelledby="rising-reading-heading">
+          <h3 id="rising-reading-heading">↗ Rising · how you meet the day</h3>
+          <p id="rising-reading"></p>
+        </section>
+        <p id="daily-guidance"></p>
+        <div class="horoscope-tip"><strong>A small star note:</strong> Let this reading inspire reflection, not make decisions for you. Your choices remain your own.</div>
+        <p><a class="page-button" href="index.html#welcome">Find your star chart <span aria-hidden="true">↗</span></a></p>
+      </article>
+    </div>
+  </main>
+  <footer><div class="footer-inner wrap"><a class="brand" href="index.html#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a><span>A cozy corner of the cosmos · <span id="year"></span></span><div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="about.html">Chart &amp; privacy</a></div></div></footer>
+  <script>
+    const signs = [
+      { name: "Aries", sun: "Today, let a brave beginning be enough; you do not need to see the whole path before taking one thoughtful step.", moon: "Your inner fire may rise quickly. Give the feeling a name before deciding what it asks of you.", rising: "Lead with initiative, and leave room for other people to find their pace beside you." },
+      { name: "Taurus", sun: "Give your attention to what is steady and nourishing. A simple ritual can help you remember what matters.", moon: "Comfort and consistency can help you feel restored. Choose what genuinely settles you, not just what is familiar.", rising: "Move at a sustainable pace. A grounded, practical choice can make the day feel more manageable." },
+      { name: "Gemini", sun: "Follow a curious question or a conversation that opens a fresh window. You are allowed to learn as you go.", moon: "Putting a feeling into words may help you understand it. Let curiosity make space for more than one answer.", rising: "Stay open to new information, and choose the conversations that leave you clearer rather than scattered." },
+      { name: "Cancer", sun: "Your sensitivity can be a compass, not a command. Notice what you feel, then choose a caring next step.", moon: "Your inner weather deserves gentleness. A little quiet or a trusted connection can help you feel at home in yourself.", rising: "Offer care without forgetting your own needs. A kind boundary can protect the energy you want to share." },
+      { name: "Leo", sun: "Let your light be warm rather than loud. Make room for something that feels joyful simply because it is yours.", moon: "Give your heart a little appreciation and room to play. You do not need an audience for your joy to count.", rising: "Meet people with generous warmth, while letting authenticity matter more than applause." },
+      { name: "Virgo", sun: "Progress does not require perfect conditions. Choose one useful next step and notice what is already working.", moon: "Sorting a feeling into smaller pieces may soothe you, but you do not have to solve every emotion today.", rising: "Your care shows in the details. Let helpfulness be a choice, not a standard you must endlessly meet." },
+      { name: "Libra", sun: "Seek harmony without making yourself smaller. A clear, kind answer may be more loving than guessing what everyone needs.", moon: "Connection can be comforting; make sure your own preference has a place in the conversation too.", rising: "Bring fairness and grace to your interactions, and trust that honest clarity can preserve connection." },
+      { name: "Scorpio", sun: "A quieter truth may be ready to notice. Take your time; certainty does not have to arrive on demand.", moon: "Your feelings may run deep. Give them privacy and patience before deciding which ones are ready to share.", rising: "Look beneath the surface, but let trust build at a human pace. Not everything needs to be solved at once." },
+      { name: "Sagittarius", sun: "Follow a thread of wonder and give it one practical next step. Curiosity and care can travel together.", moon: "A wider perspective can lift your spirits. Let yourself explore, while staying present to what you need right now.", rising: "Bring openness and humor to the day, and make promises that leave room for real life." },
+      { name: "Capricorn", sun: "Your effort counts even when no one sees it. Let rest belong in the plan alongside responsibility.", moon: "A little structure may help you feel safe, but you deserve tenderness even when nothing is finished.", rising: "Take a steady, measured approach. Progress is not a verdict on your worth." },
+      { name: "Aquarius", sun: "A different perspective could help. Share your idea while staying open to a surprise in the response.", moon: "Space to think in your own way can be restorative. Let someone trustworthy know when you would also welcome closeness.", rising: "Bring your originality into the room, and let belonging include the people who see you clearly." },
+      { name: "Pisces", sun: "Your imagination is a gift. Protect a little time for it, then ground yourself in one small present-moment comfort.", moon: "Make room for tenderness without taking on every feeling around you. A gentle limit can be an act of care.", rising: "Meet the day with compassion and intuition, while checking the practical details that keep you steady." }
+    ];
+    const now = new Date();
+    const dateLabel = new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric", year: "numeric" }).format(now);
+    document.querySelector("#horoscope-date").textContent = `Your sky note · ${dateLabel}`;
+    document.querySelector("#year").textContent = now.getFullYear();
+    const dailyGuidance = [
+      "For today, give yourself permission to pause before saying yes. A thoughtful answer can be a caring answer.",
+      "For today, look for one small thing you can finish. A little momentum is still momentum.",
+      "For today, make room for a conversation that feels honest, gentle, and real.",
+      "For today, choose restoration where you can. You do not have to earn a moment of ease."
+    ];
+    const signName = (index) => Number.isInteger(index) && index >= 0 && index < signs.length
+      ? signs[index].name
+      : null;
+    const profile = (() => {
+      try {
+        return JSON.parse(localStorage.getItem("little-star-profile") || "null");
+      } catch {
+        document.querySelector("#horoscope-sign").textContent = "✦ Saved chart unavailable";
+        document.querySelector("#horoscope-title").textContent = "Your chart could not be read.";
+        document.querySelector("#sun-reading").textContent = "Please return to the home page and create your chart again.";
+        document.querySelector("#moon-reading").textContent = "";
+        document.querySelector("#rising-reading").textContent = "";
+        return null;
+      }
+    })();
+    const sunIndex = profile && signName(profile.sunSign) !== null ? profile.sunSign : null;
+    const moonIndex = profile && signName(profile.moonSign) !== null ? profile.moonSign : null;
+    const risingIndex = profile && signName(profile.risingSign) !== null ? profile.risingSign : null;
+    if (sunIndex !== null && moonIndex !== null && risingIndex !== null) {
+      const sun = signs[sunIndex];
+      const moon = signs[moonIndex];
+      const rising = signs[risingIndex];
+      const daySeed = Number(`${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}`);
+      document.querySelector("#horoscope-sign").textContent =
+        `☼ ${sun.name} Sun · ☾ ${moon.name} Moon · ↗ ${rising.name} Rising`;
+      document.querySelector("#horoscope-title").textContent = "Three parts of your sky, one day at a time.";
+      document.querySelector("#sun-reading").textContent = sun.sun;
+      document.querySelector("#moon-reading").textContent = moon.moon;
+      document.querySelector("#rising-reading").textContent = rising.rising;
+      document.querySelector("#daily-guidance").textContent = dailyGuidance[daySeed % dailyGuidance.length];
+    } else if (profile) {
+      document.querySelector("#horoscope-sign").textContent = "✦ Update your chart for all three signs";
+      document.querySelector("#horoscope-title").textContent = "Your latest chart placements are needed.";
+      document.querySelector("#sun-reading").textContent = "Return to the home page and submit your birth details to refresh your Sun, Moon, and Rising signs.";
+      document.querySelector("#moon-reading").textContent = "";
+      document.querySelector("#rising-reading").textContent = "";
+      document.querySelector("#daily-guidance").textContent = "";
+    } else {
+      document.querySelector("#horoscope-sign").textContent = "✦ A note for everyone";
+      document.querySelector("#sun-reading").textContent = "Begin by checking in with what you need, rather than what you think you should need. One clear, kind choice can be enough to shift the tone of your day.";
+      document.querySelector("#moon-reading").textContent = "Notice the feeling that needs a little space, and let yourself respond with care.";
+      document.querySelector("#rising-reading").textContent = "Choose one small way to meet the day that feels true to you.";
+      document.querySelector("#daily-guidance").textContent = dailyGuidance[new Date().getDate() % dailyGuidance.length];
+    }
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
+      navLinks.classList.toggle("is-open", !isOpen);
+    });
+  </script>
+</body>
+</html>

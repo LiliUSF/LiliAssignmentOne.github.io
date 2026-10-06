@@ -1,0 +1,99 @@
+:root {
+  --page-ink: #1d304e;
+  --page-blue: #263d64;
+  --page-muted: #6b7f98;
+  --page-line: #d8e6f0;
+  --page-paper: #fffefa;
+  --page-gold: #d0a33e;
+  --page-sans: "Nunito", Arial, sans-serif;
+  --page-serif: "Cormorant Garamond", Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body { margin: 0; color: var(--page-ink); background: linear-gradient(155deg, #edf6ff, #e4efff 40%, #f5f8ff 72%, #e2f1ff); background-attachment: fixed; font-family: var(--page-sans); -webkit-font-smoothing: antialiased; }
+body::before { position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(#5481b52e .8px, transparent .8px); background-size: 24px 24px; content: ""; pointer-events: none; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+.wrap { width: min(1080px, calc(100% - 52px)); margin-inline: auto; }
+.topbar { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid #d8e5efc9; background: #f2f7fded; backdrop-filter: blur(13px); }
+.nav { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+.brand { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.brand-mark { color: #c3993f; font-size: 21px; }
+.brand-name { color: #243a5f; font: 500 24px/1 "Cormorant Garamond", Georgia, serif; }
+.nav-links { display: flex; align-items: center; gap: 25px; color: #536b88; font-size: 11px; font-weight: 700; }
+.nav-links a:hover, .footer-links a:hover { color: #a27a2e; }
+.nav-cta, .page-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 39px; padding: 0 17px; border: 1px solid #263d64; border-radius: 999px; color: white; background: #263d64; font-size: 10px; font-weight: 800; transition: transform .2s, box-shadow .2s; cursor: pointer; }
+.nav-cta:hover, .page-button:hover { box-shadow: 0 7px 17px #263d6429; transform: translateY(-1px); }
+.menu-toggle { display: none; }
+footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
+.footer-inner { min-height: 75px; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-block: 14px; color: #61758e; font-size: 10px; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 15px; }
+.footer-links a:hover { color: #a27a2e; }
+.page-main { min-height: calc(100vh - 145px); padding: 66px 0 78px; }
+.page-hero { max-width: 740px; margin: 0 auto 34px; text-align: center; }
+.eyebrow { color: #7b6c42; font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.page-hero h1 { margin: 10px 0 10px; color: #20385e; font: 500 clamp(40px, 7vw, 62px)/.99 var(--page-serif); letter-spacing: -.035em; }
+.page-hero p { max-width: 590px; margin: 0 auto; color: #667c96; font-size: 13px; line-height: 1.85; }
+.page-panel { padding: clamp(21px, 4vw, 36px); border: 1px solid #d7e5ef; border-radius: 18px; background: #fffefaed; box-shadow: 0 13px 35px #29457310; }
+.page-panel h2 { margin: 0 0 11px; color: #273e64; font: 500 29px/1.15 var(--page-serif); }
+.page-panel h3 { margin: 22px 0 6px; color: #294367; font: 600 20px/1.2 var(--page-serif); }
+.page-panel p, .page-panel li { color: #667c96; font-size: 12px; line-height: 1.9; }
+.page-panel p:last-child { margin-bottom: 0; }
+.horoscope-panel { max-width: 760px; margin: auto; }
+.horoscope-date { margin: 0 0 22px; color: #ad8740 !important; font-size: 10px !important; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.horoscope-sign { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 10px; padding: 6px 10px; border: 1px solid #e6d9af; border-radius: 999px; color: #725c2b; background: #fff8e7; font-size: 10px; font-weight: 800; }
+.horoscope-placement { margin-top: 15px; padding: 13px 16px; border: 1px solid #e0eaf1; border-radius: 11px; background: #f9fbfe; }
+.horoscope-placement h3 { margin: 0 0 4px; color: #304b72; font: 700 10px var(--page-sans); letter-spacing: .06em; text-transform: uppercase; }
+.horoscope-placement p { margin: 0; color: #667c96; font-size: 12px; line-height: 1.85; }
+.horoscope-panel > p#daily-guidance { margin-top: 18px; color: #ad8740; font-weight: 700; }
+.horoscope-tip { margin-top: 22px; padding: 16px 18px; border-left: 2px solid #d0a33e; border-radius: 0 10px 10px 0; background: #f5f8fc; }
+.tarot-tools { max-width: 900px; margin: auto; }
+.spread-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0 9px; }
+.spread-option { padding: 15px 12px; border: 1px solid #d9e5ee; border-radius: 12px; color: #58708d; background: #f8fbff; text-align: left; cursor: pointer; }
+.spread-option.is-selected { border-color: #d4b55f; color: #263d64; background: #fff8e5; box-shadow: 0 5px 15px #d4b55f20; }
+.spread-option strong, .spread-option span { display: block; }
+.spread-option strong { font: 600 19px var(--page-serif); }
+.spread-option span { margin-top: 3px; font-size: 10px; }
+.spread-description { min-height: 21px; color: #74869a; font-size: 11px; }
+.tarot-actions { display: flex; align-items: center; gap: 15px; margin-top: 16px; }
+.tarot-cards { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 13px; margin-top: 25px; }
+.tarot-card { min-width: 0; text-align: center; animation: card-arrive .35s ease both; }
+.tarot-face { min-height: 139px; display: grid; align-content: center; justify-items: center; gap: 7px; padding: 12px 8px; border: 1px solid #d9c681; border-radius: 12px; color: #f8e9b1; background: radial-gradient(ellipse at center, #36527f 0%, #263d64 69%, #1e3153 100%); box-shadow: 0 9px 17px #1c31551c; }
+.tarot-face span { color: #f3d47a; font-size: 28px; }
+.tarot-face strong { font: 500 18px/1.1 var(--page-serif); }
+.tarot-position { margin: 9px 0 4px !important; color: #ad8740 !important; font-size: 9px !important; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+.tarot-meaning { margin: 0 !important; font-size: 10px !important; line-height: 1.65 !important; }
+.privacy-note { padding: 13px 15px; border-radius: 10px; color: #627790; background: #eef5fb; font-size: 10px; line-height: 1.7; }
+.sparkle-trail { position: fixed; z-index: 1000; width: 18px; height: 18px; display: grid; place-items: center; color: #d0a33e; font-size: 16px; line-height: 1; pointer-events: none; text-shadow: 0 0 9px #f4d87e; animation: sparkle-drift .7s ease-out forwards; }
+@keyframes sparkle-drift { 0% { opacity: .95; transform: translate(-50%, -50%) scale(.35) rotate(0deg); } 40% { opacity: 1; transform: translate(-50%, -70%) scale(1.1) rotate(25deg); } 100% { opacity: 0; transform: translate(-50%, -115%) scale(.2) rotate(65deg); } }
+@keyframes card-arrive { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 780px) {
+  .nav-links { gap: 14px; }
+  .nav-cta { padding-inline: 12px; }
+}
+@media (max-width: 620px) {
+  .wrap { width: min(100% - 34px, 540px); }
+  .nav { min-height: 62px; flex-wrap: wrap; gap: 10px; padding-block: 10px; }
+  .menu-toggle { width: 35px; height: 35px; display: grid; align-content: center; justify-items: center; gap: 5px; margin-left: auto; border: 1px solid #d6e4ed; border-radius: 50%; background: #fffefa; }
+  .menu-toggle span { width: 13px; height: 1px; background: #294367; }
+  .nav-links { order: 3; width: 100%; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 5px 0 3px; }
+  .nav-links.is-open { display: flex; }
+  .nav-links a { padding: 10px 5px; border-top: 1px solid #e4edf3; }
+  .nav-cta { min-height: 34px; font-size: 9px; }
+  .page-main { padding: 45px 0 58px; }
+  .spread-options { grid-template-columns: 1fr; }
+  .spread-option { padding: 11px 13px; }
+  .tarot-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tarot-card:last-child:nth-child(odd) { grid-column: 1 / -1; width: 50%; justify-self: center; }
+  .footer-inner { flex-wrap: wrap; }
+}
+@media (max-width: 380px) {
+  .nav-cta { padding-inline: 9px; }
+  .brand-name { font-size: 21px; }
+}
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .sparkle-trail { display: none; }
+  html { scroll-behavior: auto; }
+  .tarot-card { animation: none; }
+}

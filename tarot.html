@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#263c60">
+  <meta name="description" content="Choose a tarot spread and draw a few cards for a moment of reflection.">
+  <title>The tarot room — lilis little sky</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="pages.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="index.html#home" aria-label="Lilis little sky home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span></button>
+      <div class="nav-links"><a href="index.html#daily-note">Daily note</a><a href="horoscope.html">Daily horoscope</a><a href="tarot.html" aria-current="page">Tarot readings</a><a href="about.html">About the chart</a></div>
+      <a class="nav-cta" href="index.html#welcome">Find your big three <span aria-hidden="true">✦</span></a>
+    </nav>
+  </header>
+  <main class="page-main">
+    <div class="wrap">
+      <header class="page-hero">
+        <span class="eyebrow">Take a breath, then choose</span>
+        <h1>Welcome to the tarot room.</h1>
+        <p>Let the cards be a mirror for your own thoughts. Settle on a question, choose a spread, and keep whatever meaning feels kind and useful.</p>
+      </header>
+      <section class="page-panel tarot-tools" aria-label="Tarot card reading">
+        <h2>What would you like a little clarity on?</h2>
+        <p>There is no perfect question. Start with something open, like “What might help me feel more grounded?”</p>
+        <div class="spread-options" role="group" aria-label="Choose a tarot spread">
+          <button class="spread-option is-selected" type="button" data-spread="one" aria-pressed="true"><strong>One card</strong><span>A gentle focus for right now</span></button>
+          <button class="spread-option" type="button" data-spread="three" aria-pressed="false"><strong>Three cards</strong><span>What was · What is · What may help</span></button>
+          <button class="spread-option" type="button" data-spread="five" aria-pressed="false"><strong>Five cards</strong><span>Pause · Notice · Release · Welcome · Carry</span></button>
+        </div>
+        <p class="spread-description" id="spread-description">A single card to offer a small point of reflection.</p>
+        <div class="tarot-actions"><button class="page-button" id="draw-cards" type="button">Draw my cards <span aria-hidden="true">✦</span></button><span class="eyebrow">Drawn just for this moment</span></div>
+        <div id="tarot-table" aria-live="polite"></div>
+        <p class="privacy-note">Tarot is for reflection and entertainment, not certainty or professional advice. You are the author of your own choices.</p>
+      </section>
+    </div>
+  </main>
+  <footer><div class="footer-inner wrap"><a class="brand" href="index.html#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a><span>A cozy corner of the cosmos · <span id="year"></span></span><div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="about.html">Chart &amp; privacy</a></div></div></footer>
+  <script>
+    const spreads = {
+      one: { description: "A single card to offer a small point of reflection.", positions: ["Your focus"], count: 1 },
+      three: { description: "Look back gently, notice where you are, and consider what may support you next.", positions: ["What was", "What is", "What may help"], count: 3 },
+      five: { description: "A longer pause to notice what is here and what you would like to carry forward.", positions: ["Pause", "Notice", "Release", "Welcome", "Carry"], count: 5 }
+    };
+    const deck = [
+      ["The Fool", "A beginning can be both exciting and uncertain. Let curiosity lead, and take one grounded step."],
+      ["The Magician", "You have more resources than you may realize. Gather what is already within reach and use it with intention."],
+      ["The High Priestess", "Make a little room for quiet. You do not need to force an answer before you have heard yourself."],
+      ["The Empress", "Nurture what you hope to grow. Rest, creativity, and care are productive in their own gentle way."],
+      ["The Emperor", "A clear structure may help you feel safer. Choose a boundary or routine that supports, rather than confines, you."],
+      ["The Hierophant", "A trusted tradition or teacher may offer perspective. Keep what resonates and leave space for your own wisdom."],
+      ["The Lovers", "Bring your choices back to your values. Alignment matters more than pleasing everyone at once."],
+      ["The Chariot", "Focus can move you forward. Decide what deserves your energy and give yourself permission to ignore the noise."],
+      ["Strength", "Tenderness is a kind of courage. Meet this moment with patience instead of trying to overpower it."],
+      ["The Hermit", "A little solitude can help you find your own signal. Step back from outside opinions long enough to listen."],
+      ["Wheel of Fortune", "Change is part of the pattern. Notice what is shifting, and choose the small part you can meet with care."],
+      ["Justice", "Clarity comes from looking at the whole picture. Be honest with yourself and make room for a fair, thoughtful choice."],
+      ["The Hanged One", "A pause is not the same as being stuck. A new angle may appear when you stop pushing for a moment."],
+      ["Death", "An ending can create room without erasing what mattered. Let a transition be real, and take it one step at a time."],
+      ["Temperance", "Try a gentler balance. You may not need an all-or-nothing answer; a small adjustment could be enough."],
+      ["The Devil", "Notice what feels binding without judging yourself. Awareness can help you find one choice that returns agency."],
+      ["The Tower", "If something feels shaken, tend to what is immediate and true. You can rebuild from what remains steady."],
+      ["The Star", "Let hope be quiet and practical. One small act of care can be a light you carry into the next day."],
+      ["The Moon", "Uncertainty can blur the edges. Wait for more information where you can, and be gentle with what you cannot know yet."],
+      ["The Sun", "Make room for warmth and uncomplicated joy. Let yourself receive a good moment without needing to earn it."],
+      ["Judgement", "You can learn from the past without living inside it. Consider what you are ready to answer differently now."],
+      ["The World", "Notice the ground you have covered. Completion can be a beginning too; take a moment to honor the whole journey."]
+    ];
+    let selectedSpread = "one";
+    document.querySelectorAll(".spread-option").forEach((button) => {
+      button.addEventListener("click", () => {
+        selectedSpread = button.dataset.spread;
+        document.querySelectorAll(".spread-option").forEach((option) => {
+          const selected = option === button;
+          option.classList.toggle("is-selected", selected);
+          option.setAttribute("aria-pressed", String(selected));
+        });
+        document.querySelector("#spread-description").textContent = spreads[selectedSpread].description;
+      });
+    });
+    document.querySelector("#draw-cards").addEventListener("click", () => {
+      const spread = spreads[selectedSpread];
+      const drawPile = [...deck];
+      const drawn = [];
+      for (let index = 0; index < spread.count; index += 1) {
+        const drawIndex = Math.floor(Math.random() * drawPile.length);
+        drawn.push(drawPile.splice(drawIndex, 1)[0]);
+      }
+      const cards = document.createElement("div");
+      cards.className = "tarot-cards";
+      drawn.forEach(([name, meaning], index) => {
+        const article = document.createElement("article");
+        article.className = "tarot-card";
+        const face = document.createElement("div");
+        face.className = "tarot-face";
+        const glyph = document.createElement("span");
+        glyph.setAttribute("aria-hidden", "true");
+        glyph.textContent = ["✦", "☾", "✧", "☼", "♧"][index];
+        const title = document.createElement("strong");
+        title.textContent = name;
+        face.append(glyph, title);
+        const position = document.createElement("p");
+        position.className = "tarot-position";
+        position.textContent = spread.positions[index];
+        const text = document.createElement("p");
+        text.className = "tarot-meaning";
+        text.textContent = meaning;
+        article.append(face, position, text);
+        cards.append(article);
+      });
+      document.querySelector("#tarot-table").replaceChildren(cards);
+    });
+    document.querySelector("#year").textContent = new Date().getFullYear();
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
+      navLinks.classList.toggle("is-open", !isOpen);
+    });
+  </script>
+</body>
+</html>
