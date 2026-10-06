@@ -17,7 +17,7 @@
     <nav class="nav wrap" aria-label="Main navigation">
       <a class="brand" href="index.html#home" aria-label="Lilis little sky home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a>
       <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span></button>
-      <div class="nav-links"><a href="index.html#daily-note">Daily note</a><a href="horoscope.html">Daily horoscope</a><a href="tarot.html">Tarot readings</a><a href="oracle.html" aria-current="page">Oracle</a><a href="manifestation.html">Manifestation</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">About the chart</a></div>
+      <div class="nav-links"><a href="index.html#daily-note">Daily note</a><a href="horoscope.html">Daily horoscope</a><a href="tarot.html">Tarot readings</a><a href="oracle.html" aria-current="page">Oracle</a><a href="manifestation.html">Manifestation</a><a href="journaling.html">Journal prompts</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">About the chart</a></div>
       <a class="nav-cta" href="index.html#welcome">Find your big three <span aria-hidden="true">✦</span></a>
     </nav>
   </header>
@@ -63,11 +63,11 @@
           </div>
         </div>
         <div class="oracle-answer" id="oracle-answer" aria-live="polite"></div>
-        <p class="oracle-disclosure">AI by OpenAI · questions aren’t saved here · avoid sensitive details · reflection, not professional advice</p>
+        <p class="oracle-disclosure">Thoughtful reflections chosen from a written collection · your question stays on this device · not professional advice</p>
       </section>
     </div>
   </main>
-  <footer><div class="footer-inner wrap"><a class="brand" href="index.html#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a><span>A cozy corner of the cosmos · <span id="year"></span></span><div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="oracle.html">Oracle</a><a href="manifestation.html">Manifestation</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">Chart &amp; privacy</a></div></div></footer>
+  <footer><div class="footer-inner wrap"><a class="brand" href="index.html#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a><span>A cozy corner of the cosmos · <span id="year"></span></span><div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="oracle.html">Oracle</a><a href="manifestation.html">Manifestation</a><a href="journaling.html">Journal prompts</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">Chart &amp; privacy</a></div></div></footer>
   <script>
     const form = document.querySelector("#oracle-form");
     const questionInput = document.querySelector("#oracle-question");
@@ -76,6 +76,52 @@
     const answer = document.querySelector("#oracle-answer");
     const genie = document.querySelector("#oracle-genie");
     const oracleStatus = document.querySelector("#oracle-status");
+    const adviceCollections = [
+      {
+        matches: /\b(friend|friendship|partner|relationship|love|dating|crush|breakup|family|text them|talk to them)\b/i,
+        replies: [
+          "It may help to separate what you hope will happen from what you can choose next. A kind, honest conversation—or a little time to understand what you need—can give you more clarity.",
+          "You deserve connections where care and respect go both ways. Notice how this relationship feels over time, and consider one small boundary or conversation that would support you.",
+          "You don’t have to guess someone else’s thoughts to honor your own. What would feel honest, respectful, and kind to you in this situation?"
+        ]
+      },
+      {
+        matches: /\b(work|job|career|school|class|study|exam|project|boss|coworker|college|assignment)\b/i,
+        replies: [
+          "Try making the next step smaller than the whole goal: open the document, list three options, or ask one person a clear question. Small progress still counts.",
+          "You don’t need to map your entire future today. Write down what matters most in this situation, then choose one practical step you can take this week.",
+          "A pause can be part of making progress. What would make this feel more manageable—a little help, a clearer plan, or some proper rest?"
+        ]
+      },
+      {
+        matches: /\b(change|new|decision|decide|choice|risk|move|moving|start|begin|quit|leave|try)\b/i,
+        replies: [
+          "You don’t have to leap without looking. Try a small, reversible experiment first, and notice what you learn before deciding on a bigger step.",
+          "List what you know, what you’re still unsure about, and what you can find out next. Clarity often comes from one grounded step, not pressure to be certain.",
+          "There may be more than one good path here. Give yourself time to compare what each choice asks of you and which one best fits your needs and values."
+        ]
+      },
+      {
+        matches: /\b(stress|anxious|anxiety|overwhelmed|sad|lonely|tired|burnt out|burned out|self.kindness|confidence|scared|afraid|stuck)\b/i,
+        replies: [
+          "You don’t have to earn a gentler moment. Try naming what feels hardest, then choose one caring thing you can do in the next ten minutes.",
+          "When everything feels like a lot, come back to what’s directly in front of you. A sip of water, a slower breath, or asking someone safe for company can be enough for this moment.",
+          "Feeling uncertain doesn’t mean you’re failing. You can take a break, ask for support, and return to this one piece at a time."
+        ]
+      },
+      {
+        matches: /\b(money|budget|spend|debt|save|rent|bill|finance)\b/i,
+        replies: [
+          "Start with a clear, kind look at the facts—what’s due, what’s available, and when. One small step, like checking a bill or asking a trusted person to review a plan, may make things feel less foggy.",
+          "You deserve decisions made without shame or panic. Gather the numbers you have, focus on what you can control today, and seek qualified help if the stakes feel high."
+        ]
+      }
+    ];
+    const generalAdvice = [
+      "You don’t have to solve the whole thing at once. What is one small, kind next step that would help you feel a little clearer?",
+      "Take a breath and give yourself permission to gather more information. You can move forward at a pace that respects your needs.",
+      "Try asking yourself: what do I know, what do I need, and who could support me? One honest answer is a good place to begin."
+    ];
 
     document.querySelectorAll(".oracle-suggestion").forEach((button) => {
       button.addEventListener("click", () => {
@@ -97,36 +143,13 @@
       answer.textContent = "";
       message.textContent = "";
       try {
-        let response;
-        try {
-          response = await fetch("/api/oracle", {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify({ question })
-          });
-        } catch {
-          throw new Error("I can’t reach the oracle server. Start the site with npm start, then open http://localhost:3000/oracle.html.");
-        }
-        if (!response.headers.get("content-type")?.includes("application/json")) {
-          throw new Error("This page is being served without the oracle API. Start the site with npm start, then open http://localhost:3000/oracle.html.");
-        }
-        let result;
-        try {
-          result = await response.json();
-        } catch {
-          throw new Error("The oracle server returned an unreadable response. Please restart it with npm start and try again.");
-        }
-        if (!response.ok) {
-          throw new Error(result.error || "The oracle could not answer just now. Please try again.");
-        }
-        if (typeof result.answer !== "string" || !result.answer.trim()) {
-          throw new Error("The oracle did not return an answer. Please try again.");
-        }
-        answer.textContent = result.answer.trim();
+        const collection = adviceCollections.find((item) => item.matches.test(question));
+        const replies = collection ? collection.replies : generalAdvice;
+        answer.textContent = replies[Math.floor(Math.random() * replies.length)];
         oracleStatus.textContent = "A little wisdom is ready ✦";
       } catch (error) {
-        message.textContent = error.message ||
-          "The oracle is out of reach. Check your connection and try again.";
+        console.error("Unable to prepare an oracle reflection:", error);
+        message.textContent = "The oracle couldn’t find a reflection just now. Please try again.";
         oracleStatus.textContent = "Ready when you are ✧";
       } finally {
         genie.classList.remove("is-thinking");

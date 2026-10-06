@@ -8,6 +8,17 @@ const projectRoot = fileURLToPath(new URL(".", import.meta.url));
 const port = Number(process.env.PORT || 3000);
 const host = process.env.HOST || "0.0.0.0";
 const model = process.env.OPENAI_MODEL || "gpt-4.1-mini";
+const defaultAllowedOrigins = [
+  "https://liliusf.github.io",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000"
+];
+const allowedOrigins = new Set(
+  (process.env.ALLOWED_ORIGINS || defaultAllowedOrigins.join(","))
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean)
+);
 const requestLimit = 10;
 const requestWindowMs = 10 * 60 * 1000;
 const requestTimesByAddress = new Map();
@@ -16,6 +27,7 @@ const publicFiles = new Set([
   "about.html",
   "horoscope.html",
   "index.html",
+  "journaling.html",
   "manifestation.html",
   "oracle.html",
   "pages.css",
@@ -36,6 +48,18 @@ function sendJson(response, statusCode, data) {
     "x-content-type-options": "nosniff"
   });
   response.end(JSON.stringify(data));
+}
+
+function applyCors(request, response) {
+  const origin = request.headers.origin;
+  if (!origin) return true;
+  if (!allowedOrigins.has(origin)) return false;
+  response.setHeader("access-control-allow-origin", origin);
+  response.setHeader("access-control-allow-methods", "POST, OPTIONS");
+  response.setHeader("access-control-allow-headers", "content-type");
+  response.setHeader("access-control-max-age", "600");
+  response.setHeader("vary", "Origin");
+  return true;
 }
 
 function getRequestCount(address, now) {
@@ -72,6 +96,15 @@ async function readJsonRequest(request) {
 }
 
 async function handleOracleRequest(request, response) {
+  if (!applyCors(request, response)) {
+    sendJson(response, 403, { error: "This site is not allowed to use the oracle service." });
+    return;
+  }
+  if (request.method === "OPTIONS") {
+    response.writeHead(204);
+    response.end();
+    return;
+  }
   if (request.method !== "POST") {
     response.setHeader("allow", "POST");
     sendJson(response, 405, { error: "Use POST to ask the oracle." });
@@ -224,6 +257,10 @@ const server = createServer((request, response) => {
   } catch {
     response.writeHead(400);
     response.end("Bad request");
+    return;
+  }
+  if (requestUrl.pathname === "/health" && request.method === "GET") {
+    sendJson(response, 200, { ok: true });
     return;
   }
   if (requestUrl.pathname === "/api/oracle") {

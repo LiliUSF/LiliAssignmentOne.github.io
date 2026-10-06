@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#263c60">
+  <meta name="description" content="Generate a spiritual journaling prompt for reflection, intuition, gratitude, or new beginnings.">
+  <title>Spiritual journal prompts — lilis little sky</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="pages.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="index.html#home" aria-label="Lilis little sky home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span></button>
+      <div class="nav-links"><a href="index.html#daily-note">Daily note</a><a href="horoscope.html">Daily horoscope</a><a href="tarot.html">Tarot readings</a><a href="oracle.html">Oracle</a><a href="manifestation.html">Manifestation</a><a href="journaling.html" aria-current="page">Journal prompts</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">About the chart</a></div>
+      <a class="nav-cta" href="index.html#welcome">Find your big three <span aria-hidden="true">✦</span></a>
+    </nav>
+  </header>
+  <main class="page-main">
+    <div class="wrap">
+      <header class="page-hero">
+        <span class="eyebrow">A quiet moment with yourself</span>
+        <h1>Let the page hold a little magic.</h1>
+        <p>Choose a theme or let the stars pick one for you. Take a breath, follow the prompt wherever it leads, and remember there’s no right way to journal.</p>
+      </header>
+      <section class="page-panel journal-panel" aria-labelledby="journal-heading">
+        <h2 id="journal-heading">What would you like to explore?</h2>
+        <div class="journal-controls">
+          <label for="prompt-theme">Choose a theme</label>
+          <select id="prompt-theme">
+            <option value="all">Surprise me</option>
+            <option value="intuition">Intuition &amp; inner wisdom</option>
+            <option value="gratitude">Gratitude &amp; grounding</option>
+            <option value="release">Release &amp; renewal</option>
+            <option value="connection">Connection &amp; love</option>
+            <option value="dreams">Dreams &amp; becoming</option>
+            <option value="cosmic">Cosmic reflection</option>
+          </select>
+          <button class="page-button" id="generate-prompt" type="button">Give me a prompt <span aria-hidden="true">✦</span></button>
+        </div>
+        <article class="journal-prompt-card" aria-live="polite" aria-atomic="true">
+          <span class="eyebrow" id="prompt-label">Your prompt is waiting</span>
+          <p id="prompt-text">Choose a theme and invite a little reflection.</p>
+        </article>
+        <p class="journal-note">These prompts are for personal reflection, not predictions or professional advice. Skip or change anything that doesn’t feel right for you.</p>
+        <p class="journal-about-link"><a href="about.html#creator">Meet the creator <span aria-hidden="true">↗</span></a></p>
+      </section>
+    </div>
+  </main>
+  <footer><div class="footer-inner wrap"><a class="brand" href="index.html#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a><span>A cozy corner of the cosmos · <span id="year"></span></span><div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="oracle.html">Oracle</a><a href="manifestation.html">Manifestation</a><a href="journaling.html">Journal prompts</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">Chart &amp; privacy</a></div></div></footer>
+  <script>
+    const prompts = [
+      { theme: "intuition", label: "Intuition & inner wisdom", text: "Think of a decision you’re sitting with. What do you know for sure, what are you still learning, and what would help you feel grounded enough to choose?" },
+      { theme: "intuition", label: "Intuition & inner wisdom", text: "When have you trusted your own judgment recently? Write about what helped you recognize what felt right for you." },
+      { theme: "intuition", label: "Intuition & inner wisdom", text: "If your inner wisdom could offer you a kind question instead of an answer, what might it ask you today?" },
+      { theme: "intuition", label: "Intuition & inner wisdom", text: "Describe a moment when your body felt calm or settled. What was happening, and how might you invite a little more of that feeling into your day?" },
+      { theme: "gratitude", label: "Gratitude & grounding", text: "List five small things that made today gentler. Choose one and describe it using all the details you can remember." },
+      { theme: "gratitude", label: "Gratitude & grounding", text: "What place, object, or daily ritual helps you feel at home in yourself? Write about why it matters." },
+      { theme: "gratitude", label: "Gratitude & grounding", text: "Name one thing you appreciate about the person you are becoming, and one small way you can care for yourself today." },
+      { theme: "gratitude", label: "Gratitude & grounding", text: "What support have you received lately—big or small? How might you acknowledge it, or offer that kind of care to yourself?" },
+      { theme: "release", label: "Release & renewal", text: "What expectation are you ready to loosen your hold on? What could become possible if you gave yourself permission to do things differently?" },
+      { theme: "release", label: "Release & renewal", text: "Write down something that feels heavy. What part is yours to act on, and what part can you set down for now?" },
+      { theme: "release", label: "Release & renewal", text: "Imagine making space for a new season in your life. What would you like to carry forward, and what can stay behind?" },
+      { theme: "release", label: "Release & renewal", text: "What would forgiveness or self-compassion look like in this moment—not as approval, but as a way to move with less weight?" },
+      { theme: "connection", label: "Connection & love", text: "What helps you feel seen and safe in a relationship? How could you communicate one of those needs with care?" },
+      { theme: "connection", label: "Connection & love", text: "Who makes ordinary moments feel a little brighter? Write about a quality you value in them and how you can show appreciation." },
+      { theme: "connection", label: "Connection & love", text: "Where could a kind boundary help you care for a connection and for yourself at the same time?" },
+      { theme: "connection", label: "Connection & love", text: "Write a note to yourself as if you were speaking to someone you love. What would you want them to remember today?" },
+      { theme: "dreams", label: "Dreams & becoming", text: "Imagine a day that feels meaningful to you a year from now. What ordinary details are part of it, and what small step could bring you closer?" },
+      { theme: "dreams", label: "Dreams & becoming", text: "What dream keeps returning to your thoughts? What is one low-pressure way to explore it this week?" },
+      { theme: "dreams", label: "Dreams & becoming", text: "If you didn’t have to be perfect at something new, what would you be curious to try?" },
+      { theme: "dreams", label: "Dreams & becoming", text: "What does success feel like when you define it for yourself? Describe it without comparing your path to anyone else’s." },
+      { theme: "cosmic", label: "Cosmic reflection", text: "If today’s moon could be a metaphor for your energy, what would it be? What might that image help you notice about what you need?" },
+      { theme: "cosmic", label: "Cosmic reflection", text: "Choose a star, planet, or constellation that catches your imagination. What quality or story does it bring to mind for this chapter of your life?" },
+      { theme: "cosmic", label: "Cosmic reflection", text: "What pattern have you been noticing in your days lately? What practical, compassionate meaning might you make from it?" },
+      { theme: "cosmic", label: "Cosmic reflection", text: "Imagine the night sky making room for every star to shine in its own time. Where in your life could you let your own timing be enough?" }
+    ];
+    const themeSelect = document.querySelector("#prompt-theme");
+    const promptLabel = document.querySelector("#prompt-label");
+    const promptText = document.querySelector("#prompt-text");
+    let previousPrompt = -1;
+
+    document.querySelector("#generate-prompt").addEventListener("click", () => {
+      const selectedTheme = themeSelect.value;
+      const availablePrompts = prompts
+        .map((prompt, index) => ({ ...prompt, index }))
+        .filter((prompt) => selectedTheme === "all" || prompt.theme === selectedTheme);
+      const choices = availablePrompts.filter((prompt) => prompt.index !== previousPrompt);
+      const selectedPrompt = choices[Math.floor(Math.random() * choices.length)] || availablePrompts[0];
+      previousPrompt = selectedPrompt.index;
+      promptLabel.textContent = selectedPrompt.label;
+      promptText.textContent = selectedPrompt.text;
+    });
+
+    document.querySelector("#year").textContent = new Date().getFullYear();
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
+      navLinks.classList.toggle("is-open", !isOpen);
+    });
+  </script>
+</body>
+</html>
