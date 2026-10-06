@@ -97,12 +97,25 @@
       answer.textContent = "";
       message.textContent = "";
       try {
-        const response = await fetch("/api/oracle", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ question })
-        });
-        const result = await response.json();
+        let response;
+        try {
+          response = await fetch("/api/oracle", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ question })
+          });
+        } catch {
+          throw new Error("I can’t reach the oracle server. Start the site with npm start, then open http://localhost:3000/oracle.html.");
+        }
+        if (!response.headers.get("content-type")?.includes("application/json")) {
+          throw new Error("This page is being served without the oracle API. Start the site with npm start, then open http://localhost:3000/oracle.html.");
+        }
+        let result;
+        try {
+          result = await response.json();
+        } catch {
+          throw new Error("The oracle server returned an unreadable response. Please restart it with npm start and try again.");
+        }
         if (!response.ok) {
           throw new Error(result.error || "The oracle could not answer just now. Please try again.");
         }
