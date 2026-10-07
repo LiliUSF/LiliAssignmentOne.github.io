@@ -54,7 +54,7 @@
 
     .hero { min-height: 620px; display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 48px; padding-block: 67px 75px; }
     .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--blue); font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
-    .eyebrow::before { color: #d3aa43; font-size: 13px; content: "✦"; }
+    .eyebrow::before { color: #d3aa43; font-size: 13px; content: "✦"; animation: twinkle 1.8s ease-in-out infinite alternate; }
     h1, h2, h3, p { margin-top: 0; }
     h1 { max-width: 550px; margin: 17px 0 16px; font: 500 clamp(48px, 6vw, 76px)/1.04 var(--serif); letter-spacing: -2.5px; }
     h1 em { color: var(--blue); font-weight: 500; }
@@ -69,7 +69,7 @@
     .moon-orbit.orbit-two { width: 89%; height: 89%; border-color: #ffffffc9; transform: rotate(26deg); }
     .crescent { position: relative; color: var(--gold); font-size: 172px; line-height: .9; text-shadow: 0 0 28px #f0c65b68, 0 0 74px #f0c65b36; }
     .crescent::after { content: none; }
-    .star { position: absolute; color: #e1b448; text-shadow: 0 0 12px #fff4cc; animation: twinkle 3s ease-in-out infinite alternate; }
+    .star { position: absolute; color: #e1b448; text-shadow: 0 0 12px #fff4cc; animation: twinkle 1.8s ease-in-out infinite alternate; }
     .star.s1 { top: 16%; left: 31%; font-size: 24px; }
     .star.s2 { top: 34%; right: 16%; font-size: 16px; animation-delay: .9s; }
     .star.s3 { right: 28%; bottom: 15%; font-size: 27px; animation-delay: 1.3s; }
@@ -245,8 +245,8 @@
     }
     /* A few hand-drawn-looking celestial details make the sky feel like a field journal. */
     .hero { position: relative; }
-    .hero::before { position: absolute; top: 94px; left: -22px; color: #d2a83e; content: "✦"; font-size: 20px; transform: rotate(-15deg); }
-    .hero::after { position: absolute; right: 41%; bottom: 71px; color: #7da4c0; content: "✧"; font-size: 17px; }
+    .hero::before { position: absolute; top: 94px; left: -22px; color: #d2a83e; content: "✦"; font-size: 20px; transform: rotate(-15deg); animation: twinkle 1.8s ease-in-out infinite alternate; }
+    .hero::after { position: absolute; right: 41%; bottom: 71px; color: #7da4c0; content: "✧"; font-size: 17px; animation: twinkle 1.8s ease-in-out .5s infinite alternate; }
     .hero-content { padding: 26px 24px 27px; border: 1px solid #fff; border-radius: 47% 15px 15px 15px; background: linear-gradient(145deg, #fffefa9c, #e8f5ffbd); box-shadow: 0 14px 36px #59799a0b; }
     .hero-content h1 { font-size: clamp(46px, 5.6vw, 70px); }
     .hero-art { isolation: isolate; }
@@ -259,7 +259,7 @@
     .art-label { border-radius: 50% 8px 50% 8px; }
     .welcome-card { border: 2px solid #fffefa; outline: 1px solid #d4e4ee; }
     .welcome-copy { position: relative; overflow: hidden; }
-    .welcome-copy::after { position: absolute; right: 23px; bottom: 8px; color: #f0c65b99; content: "✧"; font-size: 61px; transform: rotate(12deg); }
+    .welcome-copy::after { position: absolute; right: 23px; bottom: 8px; color: #f0c65b99; content: "✧"; font-size: 61px; transform: rotate(12deg); animation: twinkle 2s ease-in-out .3s infinite alternate; }
     .form-heading { font-size: 22px; }
     .birth-grid { grid-template-columns: 1fr 1fr; }
     .chart-panel { border: 1px solid #c8d8e4; border-radius: 48% 18px 18px; }
@@ -272,7 +272,7 @@
     .forget-button { border-color: #e6dce0; color: #936f7e; }
     .panel { border-radius: 22px 22px 22px 7px; }
     .chart-panel { position: relative; overflow: hidden; background: linear-gradient(155deg, #fffefa 55%, #f1f9ff); }
-    .chart-panel::after { position: absolute; top: 17px; right: 20px; color: #d2a83e; content: "✧"; font-size: 18px; }
+    .chart-panel::after { position: absolute; top: 17px; right: 20px; color: #d2a83e; content: "✧"; font-size: 18px; animation: twinkle 1.8s ease-in-out infinite alternate; }
     .zodiac-wheel { background: repeating-conic-gradient(from -15deg, #edf6fd 0deg 29deg, #deeffa 30deg 30.8deg); }
     .wheel-center { width: 47%; }
     .placements-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
@@ -281,13 +281,13 @@
     .placement-stat strong { overflow: hidden; color: var(--blue-dark); font: 500 14px var(--serif); text-overflow: ellipsis; }
     .placement-note { min-height: 32px; margin: 10px 0 0; color: #71839a; font-size: 10px; line-height: 1.65; }
     .tarot-section { position: relative; overflow: hidden; }
-    .tarot-section::before { position: absolute; top: 23px; right: 7%; color: #d8b75e; content: "✧"; font-size: 40px; }
+    .tarot-section::before { position: absolute; top: 23px; right: 7%; color: #d8b75e; content: "✧"; font-size: 40px; animation: twinkle 1.8s ease-in-out .5s infinite alternate; }
     .spread-picker { border-radius: 22px 8px 22px 22px; }
     .tarot-table { border-radius: 8px 22px 22px; }
     .tarot-card:nth-child(even) .card-face { background: linear-gradient(145deg, #f3f8ff, #e6f0fc); border-color: #bfd2e3; }
     .tarot-card:nth-child(even) .card-inner { background: #fbfdff; border-color: #b9cfe2; }
     .closing { position: relative; overflow: hidden; }
-    .closing::before, .closing::after { position: absolute; color: #d8b75e; content: "✦"; }
+    .closing::before, .closing::after { position: absolute; color: #d8b75e; content: "✦"; animation: twinkle 1.8s ease-in-out infinite alternate; }
     .closing::before { top: 25px; left: 18%; transform: rotate(-12deg); }
     .closing::after { right: 18%; bottom: 19px; font-size: 20px; transform: rotate(14deg); }
     @media (max-width: 780px) {
@@ -369,9 +369,9 @@
     .daily-note-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
     .universal-card { min-height: 205px; position: relative; overflow: hidden; padding: 24px 27px; border: 1px solid #ffffff99; border-radius: 18px 6px 18px 18px; box-shadow: 0 12px 30px #15294b16; }
     .advice-card { color: #f8f7ff; background: linear-gradient(130deg, #466da5 0%, #334b7e 52%, #26375f 100%); }
-    .advice-card::after { position: absolute; right: -8px; bottom: -35px; color: #ffffff10; content: "✧"; font-size: 162px; line-height: 1; }
+    .advice-card::after { position: absolute; right: -8px; bottom: -35px; color: #ffffff10; content: "✧"; font-size: 162px; line-height: 1; animation: twinkle 2s ease-in-out .6s infinite alternate; }
     .quote-card { color: #f9f5e9; background: linear-gradient(130deg, #344b78 0%, #23365c 52%, #182846 100%); }
-    .quote-card::after { position: absolute; right: 22px; bottom: -15px; color: #f4d77c29; content: "✦"; font-size: 93px; line-height: 1; transform: rotate(-12deg); }
+    .quote-card::after { position: absolute; right: 22px; bottom: -15px; color: #f4d77c29; content: "✦"; font-size: 93px; line-height: 1; transform: rotate(-12deg); animation: twinkle 2s ease-in-out .4s infinite alternate; }
     .universal-card-icon { position: absolute; top: 17px; right: 19px; color: #ffdc7c; font: 23px var(--serif); }
     .quote-card .universal-card-icon { top: 6px; right: 18px; font-size: 66px; opacity: .45; }
     .universal-label { display: block; margin-bottom: 14px; color: #f5da91; font-size: 9px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }

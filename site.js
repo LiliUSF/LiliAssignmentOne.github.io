@@ -3,8 +3,8 @@
   skyStars.className = "sky-stars";
   skyStars.setAttribute("aria-hidden", "true");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const starCount = window.matchMedia("(max-width: 620px)").matches ? 30 : 48;
-  const starGlyphs = ["✦", "✧", "⋆", "·"];
+  const starCount = window.matchMedia("(max-width: 620px)").matches ? 48 : 76;
+  const starGlyphs = ["✦", "✧", "⋆", "★", "☆"];
 
   for (let index = 0; index < starCount; index += 1) {
     const star = document.createElement("span");
@@ -19,6 +19,39 @@
   }
 
   document.body.prepend(skyStars);
+
+  function twinkleStarsIn(root) {
+    if (root.nodeType === Node.TEXT_NODE) {
+      const text = root.nodeValue || "";
+      if (!/[✦✧⋆★☆]/u.test(text) || root.parentElement?.closest(".twinkle-star, .sky-stars, .site-goasty, script, style, textarea, noscript")) return;
+      const fragment = document.createDocumentFragment();
+      text.split(/([✦✧⋆★☆])/u).forEach((part) => {
+        if (!part) return;
+        if (/^[✦✧⋆★☆]$/u.test(part)) {
+          const star = document.createElement("span");
+          star.className = "twinkle-star";
+          star.setAttribute("aria-hidden", "true");
+          star.textContent = part;
+          fragment.append(star);
+        } else {
+          fragment.append(document.createTextNode(part));
+        }
+      });
+      root.replaceWith(fragment);
+      return;
+    }
+
+    if (root.nodeType !== Node.ELEMENT_NODE || root.closest?.(".twinkle-star, .sky-stars, .site-goasty, script, style, textarea, noscript")) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const textNodes = [];
+    while (walker.nextNode()) textNodes.push(walker.currentNode);
+    textNodes.forEach(twinkleStarsIn);
+  }
+
+  twinkleStarsIn(document.body);
+  new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => mutation.addedNodes.forEach(twinkleStarsIn));
+  }).observe(document.body, { childList: true, subtree: true });
 
   const goodNews = [
     "Good news: you don’t have to figure it all out today. One small step is enough.",
@@ -169,8 +202,10 @@
     window.addEventListener("resize", () => {
       const maxLeft = Math.max(10, window.innerWidth - goasty.offsetWidth - 10);
       const maxTop = Math.max(90, window.innerHeight - goasty.offsetHeight - 12);
-      goasty.style.left = `${Math.min(Number.parseFloat(goasty.style.left), maxLeft)}px`;
-      goasty.style.top = `${Math.min(Number.parseFloat(goasty.style.top), maxTop)}px`;
+      const currentLeft = Number.parseFloat(goasty.style.left);
+      const currentTop = Number.parseFloat(goasty.style.top);
+      goasty.style.left = `${Number.isFinite(currentLeft) ? Math.max(10, Math.min(currentLeft, maxLeft)) : Math.max(10, window.innerWidth - goasty.offsetWidth - 18)}px`;
+      goasty.style.top = `${Number.isFinite(currentTop) ? Math.max(90, Math.min(currentTop, maxTop)) : Math.max(90, window.innerHeight - goasty.offsetHeight - 18)}px`;
       goasty.classList.toggle("is-left", Number.parseFloat(goasty.style.left) < window.innerWidth / 2);
     }, { passive: true });
   }
