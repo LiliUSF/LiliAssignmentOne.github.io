@@ -13,6 +13,12 @@
 html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 body { margin: 0; color: var(--page-ink); background: linear-gradient(155deg, #edf6ff, #e4efff 40%, #f5f8ff 72%, #e2f1ff); background-attachment: fixed; font-family: var(--page-sans); -webkit-font-smoothing: antialiased; }
 body::before { position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(#5481b52e .8px, transparent .8px); background-size: 24px 24px; content: ""; pointer-events: none; }
+body > header, body > main, body > footer { position: relative; z-index: 1; }
+.sky-stars { position: fixed; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
+.sky-star { position: absolute; color: #c69d48; font-size: var(--star-size, 12px); line-height: 1; text-shadow: 0 0 5px #fff7d5, 0 0 12px #eac65c9c; opacity: .75; animation: ambient-star-twinkle var(--star-duration, 2.6s) ease-in-out var(--star-delay, 0s) infinite alternate; }
+.sky-star-1 { color: #fff; text-shadow: 0 0 5px #fff, 0 0 12px #aac6ef; }
+.sky-star-2 { color: #849fc6; text-shadow: 0 0 5px #fff, 0 0 10px #b6cae8; }
+@keyframes ambient-star-twinkle { 0% { opacity: .2; transform: scale(.55) rotate(-18deg); filter: brightness(.8); } 55% { opacity: .72; } 100% { opacity: 1; transform: scale(1.3) rotate(18deg); filter: brightness(1.45); } }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; }
 .wrap { width: min(1080px, calc(100% - 52px)); margin-inline: auto; }
@@ -60,7 +66,6 @@ footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
 .journal-prompt-card { min-height: 200px; display: flex; flex-direction: column; justify-content: center; margin-top: 20px; padding: clamp(22px, 5vw, 38px); border: 1px solid #e5dcbf; border-radius: 15px; background: radial-gradient(ellipse at top right, #fff7df 0, #fffefa 56%, #f5f7ff 100%); text-align: center; overflow-wrap: anywhere; }
 .journal-prompt-card .eyebrow { color: #92763a; }
 .journal-prompt-card p { margin: 12px 0 0; color: #344d70; font: 500 clamp(22px, 4vw, 31px)/1.5 var(--page-serif); }
-.journal-note { margin: 14px 0 0; color: #74849a !important; font-size: 10px !important; line-height: 1.7 !important; text-align: center; }
 .journal-about-link { margin-top: 18px; text-align: center; }
 .journal-about-link a { color: #8c7138; font-size: 11px; font-weight: 800; }
 .horoscope-panel { max-width: 760px; margin: auto; }
@@ -69,8 +74,8 @@ footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
 .horoscope-placement { margin-top: 15px; padding: 13px 16px; border: 1px solid #e0eaf1; border-radius: 11px; background: #f9fbfe; }
 .horoscope-placement h3 { margin: 0 0 4px; color: #304b72; font: 700 10px var(--page-sans); letter-spacing: .06em; text-transform: uppercase; }
 .horoscope-placement p { margin: 0; color: #667c96; font-size: 12px; line-height: 1.85; }
+.horoscope-placement p.horoscope-traits { margin-top: 7px; color: #92763a; font-size: 10px; font-weight: 800; line-height: 1.6; }
 .horoscope-panel > p#daily-guidance { margin-top: 18px; color: #ad8740; font-weight: 700; }
-.horoscope-tip { margin-top: 14px; padding: 8px 12px; border-left: 2px solid #d0a33e; border-radius: 0 8px 8px 0; background: #f5f8fc; font-size: 10px; line-height: 1.6; }
 .tarot-tools { max-width: 900px; margin: auto; }
 .spread-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0 9px; }
 .spread-option { padding: 15px 12px; border: 1px solid #d9e5ee; border-radius: 12px; color: #58708d; background: #f8fbff; text-align: left; cursor: pointer; }
@@ -87,7 +92,6 @@ footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
 .tarot-face strong { font: 500 18px/1.1 var(--page-serif); }
 .tarot-position { margin: 9px 0 4px !important; color: #ad8740 !important; font-size: 9px !important; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
 .tarot-meaning { margin: 0 !important; font-size: 10px !important; line-height: 1.65 !important; }
-.privacy-note { padding: 13px 15px; border-radius: 10px; color: #627790; background: #eef5fb; font-size: 10px; line-height: 1.7; }
 .manifestation-panel { max-width: 900px; margin: auto; }
 .manifestation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; margin-top: 23px; }
 .manifestation-method { position: relative; min-height: 190px; padding: 20px; overflow: hidden; border: 1px solid #dce5f1; border-radius: 14px; background: linear-gradient(145deg, #fffefa, #f7f8ff); }
@@ -96,9 +100,6 @@ footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
 .manifestation-method p { margin: 0; }
 .manifestation-method .manifestation-prompt { margin-top: 12px; padding-top: 10px; border-top: 1px solid #e6eaf1; color: #657996; font-size: 11px; }
 .manifestation-prompt strong { color: #8a713c; }
-.manifestation-note { margin-top: 19px; padding: 10px 13px; border: 1px solid #eee7d4; border-radius: 9px; background: #fffcf4; }
-.manifestation-note h2 { margin-bottom: 3px; font-size: 17px; }
-.manifestation-note p { margin: 0; font-size: 10px; line-height: 1.65; }
 .manifestation-next { margin-top: 20px; text-align: center; }
 .angel-panel { max-width: 900px; margin: auto; }
 .angel-number-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; margin-top: 20px; }
@@ -113,6 +114,15 @@ footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
 .angel-note h2 { margin-bottom: 5px; font-size: 23px; }
 .angel-note p { margin: 0; }
 .angel-next { margin-top: 20px; text-align: center; }
+.zodiac-panel { max-width: 960px; margin: auto; }
+.zodiac-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
+.zodiac-card { position: relative; min-width: 0; padding: 19px 20px 18px 78px; border: 1px solid #dce5f1; border-radius: 14px; background: linear-gradient(145deg, #fffefa, #f7f8ff); }
+.zodiac-glyph { position: absolute; top: 18px; left: 19px; color: #bd9b4c; font: 500 35px/1 var(--page-serif); }
+.zodiac-card h3 { margin: 0; color: #294367; font: 600 24px/1.2 var(--page-serif); }
+.zodiac-dates { margin: 3px 0 8px !important; color: #9b7a39 !important; font-size: 10px !important; font-weight: 800; }
+.zodiac-card p { margin: 0; }
+.zodiac-element { display: inline-block; margin-top: 11px; padding: 4px 9px; border: 1px solid #e6d9af; border-radius: 999px; color: #725c2b; background: #fff8e7; font-size: 9px; font-weight: 800; }
+.zodiac-next { margin-top: 20px; text-align: center; }
 .oracle-panel { max-width: 760px; margin: auto; }
 .oracle-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); align-items: center; gap: 28px; }
 .oracle-genie-wrap { display: grid; justify-items: center; gap: 6px; }
@@ -130,7 +140,7 @@ footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
 .blush-right { right: 1px; }
 .genie-smile { position: absolute; top: 16px; left: 33px; width: 10px; height: 7px; border-bottom: 1.5px solid #9c6072; border-radius: 50%; }
 .genie-smoke { position: absolute; bottom: 6px; left: 48px; width: 95px; height: 22px; border-radius: 50%; background: #9aaddcba; filter: blur(8px); animation: smoke-pulse 3.1s ease-in-out infinite; }
-.genie-sparkle { position: absolute; z-index: 2; color: #d4a943; text-shadow: 0 0 10px #f5dc91; animation: genie-twinkle 1.8s ease-in-out infinite alternate; }
+.genie-sparkle { position: absolute; z-index: 2; color: #d4a943; text-shadow: 0 0 10px #f5dc91; animation: genie-twinkle 1.3s ease-in-out infinite alternate; }
 .sparkle-one { top: 27px; left: 9px; font-size: 17px; }
 .sparkle-two { top: 73px; right: 4px; font-size: 21px; animation-delay: .7s; }
 .sparkle-three { right: 15px; bottom: 25px; font-size: 13px; animation-delay: 1.1s; }
@@ -144,16 +154,31 @@ footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
 .oracle-submit:disabled { opacity: .65; cursor: wait; }
 .oracle-answer { min-height: 74px; margin-top: 18px; padding: 15px 17px; border: 1px solid #e4d8ae; border-radius: 12px; color: #4c5870; background: linear-gradient(135deg, #fffbef, #f4f7fd); font: 500 19px/1.5 var(--page-serif); }
 .oracle-answer:empty { display: none; }
-.page-panel p.oracle-disclosure { margin: 10px 2px 0; color: #68798e; font-size: 9px; line-height: 1.5; text-align: center; }
 .oracle-message { min-height: 16px; margin: 8px 0 0; color: #9d5360 !important; font-size: 10px !important; }
 .oracle-suggestions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 11px; }
 .oracle-suggestion { padding: 7px 10px; border: 1px solid #d9e5ee; border-radius: 999px; color: #57708e; background: #f8fbff; font-size: 9px; cursor: pointer; }
 .oracle-suggestion:hover { border-color: #d3b96d; background: #fff9e8; }
 @keyframes genie-float { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-8px) rotate(1deg); } }
 @keyframes genie-listening { from { transform: rotate(-5deg) translateY(-2px); } to { transform: rotate(5deg) translateY(-7px); } }
-@keyframes genie-twinkle { from { opacity: .4; transform: scale(.75) rotate(-12deg); } to { opacity: 1; transform: scale(1.15) rotate(12deg); } }
+@keyframes genie-twinkle { from { opacity: .2; transform: scale(.6) rotate(-18deg); } to { opacity: 1; transform: scale(1.35) rotate(18deg); } }
 @keyframes smoke-pulse { 0%, 100% { opacity: .55; transform: scaleX(.9); } 50% { opacity: .85; transform: scaleX(1.08); } }
 .sparkle-trail { position: fixed; z-index: 1000; width: 18px; height: 18px; display: grid; place-items: center; color: #d0a33e; font-size: 16px; line-height: 1; pointer-events: none; text-shadow: 0 0 9px #f4d87e; animation: sparkle-drift .7s ease-out forwards; }
+.site-goasty { position: fixed; z-index: 15; top: 0; left: 0; width: 68px; height: 78px; display: grid; place-items: center; transition: left 5.2s cubic-bezier(.45,0,.55,1), top 5.2s cubic-bezier(.45,0,.55,1); }
+.site-goasty.is-moving { will-change: left, top; }
+.site-goasty-message { position: absolute; right: 0; bottom: calc(100% + 4px); width: min(205px, calc(100vw - 24px)); display: none; margin: 0; padding: 9px 12px; border: 1px solid #d9e4f2; border-radius: 12px 12px 3px 12px; color: #405777; background: #fffefaf5; box-shadow: 0 6px 20px #233b5a24; font-size: 10px; line-height: 1.55; animation: goasty-message-in .2s ease-out both; }
+.site-goasty.is-left .site-goasty-message { right: auto; left: 0; border-radius: 12px 12px 12px 3px; }
+.site-goasty.is-speaking .site-goasty-message { display: block; }
+.site-goasty-ghost { position: relative; width: 66px; height: 73px; display: grid; place-items: center; padding: 0; border: 0; background: transparent; cursor: pointer; filter: drop-shadow(0 5px 8px #405d9138); }
+.site-goasty-ghost:focus-visible, .site-goasty-dismiss:focus-visible { outline: 2px solid #7d91bc; outline-offset: 3px; }
+.site-goasty-body { position: relative; width: 48px; height: 59px; border: 1px solid #aebce4; border-radius: 48% 48% 24% 24% / 43% 43% 20% 20%; background: linear-gradient(145deg, #fff 8%, #f7f7ff 58%, #dbe5fb); clip-path: polygon(10% 0, 90% 0, 100% 80%, 86% 92%, 67% 86%, 50% 100%, 31% 88%, 12% 94%, 0 80%); animation: goasty-drift 2.6s ease-in-out infinite; }
+.site-goasty-eyes { position: absolute; top: 25px; left: 14px; width: 4px; height: 7px; border-radius: 50%; background: #314568; box-shadow: 16px 0 #314568; }
+.site-goasty-mouth { position: absolute; top: 35px; left: 23px; width: 5px; height: 4px; border-bottom: 1px solid #9c6072; border-radius: 50%; }
+.site-goasty-sparkle { position: absolute; top: 5px; left: 2px; z-index: 1; color: #d0a33e; font-size: 16px; text-shadow: 0 0 8px #f4d87e; animation: genie-twinkle 1.2s ease-in-out infinite alternate; }
+.site-goasty-dismiss { position: absolute; top: 42px; right: -3px; width: 20px; height: 20px; display: grid; place-items: center; padding: 0; border: 1px solid #d9e4f2; border-radius: 50%; color: #637894; background: #fffefa; font-size: 15px; line-height: 1; cursor: pointer; }
+.goasty-dust { position: fixed; z-index: 14; display: grid; width: var(--dust-size, 18px); height: var(--dust-size, 18px); place-items: center; color: #f2c94c; font-size: var(--dust-size, 18px); line-height: 1; pointer-events: none; text-shadow: 0 0 5px #fff4bd, 0 0 12px #f2c94c, 0 0 22px #f2c94caa; animation: goasty-dust-trail 1.35s ease-out forwards; }
+@keyframes goasty-dust-trail { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.25) rotate(-12deg); } 15% { opacity: 1; transform: translate(-50%, -50%) scale(1.1) rotate(0); } 100% { opacity: 0; transform: translate(calc(-50% + var(--dust-drift-x)), calc(-50% + var(--dust-drift-y))) scale(.25) rotate(48deg); } }
+@keyframes goasty-message-in { from { opacity: 0; transform: translateY(5px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes goasty-drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
 @keyframes sparkle-drift { 0% { opacity: .95; transform: translate(-50%, -50%) scale(.35) rotate(0deg); } 40% { opacity: 1; transform: translate(-50%, -70%) scale(1.1) rotate(25deg); } 100% { opacity: 0; transform: translate(-50%, -115%) scale(.2) rotate(65deg); } }
 @keyframes card-arrive { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 780px) {
@@ -176,10 +201,16 @@ footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
   .spread-options { grid-template-columns: 1fr; }
   .manifestation-grid { grid-template-columns: 1fr; }
   .angel-number-grid, .angel-sequence-list { grid-template-columns: 1fr; }
+  .zodiac-grid { grid-template-columns: 1fr; }
   .spread-option { padding: 11px 13px; }
   .tarot-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .tarot-card:last-child:nth-child(odd) { grid-column: 1 / -1; width: 50%; justify-self: center; }
   .footer-inner { flex-wrap: wrap; }
+  .site-goasty { width: 58px; height: 64px; }
+  .site-goasty-message { padding: 7px 9px; font-size: 9px; }
+  .site-goasty-ghost { width: 56px; height: 62px; }
+  .site-goasty-body { transform: scale(.86); }
+  .site-goasty-dismiss { top: 0; right: 0; }
   .creator-section { grid-template-columns: 1fr; }
   .creator-photo { max-width: 360px; margin-inline: auto; }
   .creator-journal-link { align-items: flex-start; flex-direction: column; }
@@ -201,5 +232,11 @@ footer { border-top: 1px solid #d5e3ee; background: #f0f6fcdf; }
   .sparkle-trail { display: none; }
   html { scroll-behavior: auto; }
   .tarot-card { animation: none; }
-  .genie-body, .genie-smoke, .genie-sparkle, .oracle-genie.is-thinking .genie-body { animation: none; }
+  .genie-body, .genie-smoke, .genie-sparkle, .oracle-genie.is-thinking .genie-body, .site-goasty-body, .site-goasty-sparkle { animation: none; }
+  .site-goasty-message { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sky-star { animation: none; opacity: .65; }
+  .site-goasty { transition: none; }
+  .goasty-dust { animation: none; }
 }

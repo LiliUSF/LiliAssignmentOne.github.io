@@ -17,7 +17,7 @@
     <nav class="nav wrap" aria-label="Main navigation">
       <a class="brand" href="index.html#home" aria-label="Lilis little sky home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a>
       <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span></button>
-      <div class="nav-links"><a href="index.html#daily-note">Daily note</a><a href="horoscope.html">Daily horoscope</a><a href="tarot.html">Tarot readings</a><a href="oracle.html" aria-current="page">Oracle</a><a href="manifestation.html">Manifestation</a><a href="journaling.html">Journal prompts</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">About the chart</a></div>
+      <div class="nav-links"><a href="index.html#daily-note">Daily note</a><a href="horoscope.html">Daily horoscope</a><a href="tarot.html">Tarot readings</a><a href="oracle.html" aria-current="page">Oracle</a><a href="manifestation.html">Manifestation</a><a href="journaling.html">Journal prompts</a><a href="zodiac-signs.html">Zodiac signs</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">Meet the creator</a></div>
       <a class="nav-cta" href="index.html#welcome">Find your big three <span aria-hidden="true">✦</span></a>
     </nav>
   </header>
@@ -25,8 +25,8 @@
     <div class="wrap">
       <header class="page-hero">
         <span class="eyebrow">A little magic, a thoughtful answer</span>
-        <h1>Meet Goasty, your magic 8 ghost.</h1>
-        <p>Bring a question you’ve been turning over. Goasty will pick a warm reflection—not a prediction, and never a substitute for your own good judgment.</p>
+        <h1>Meet Ghoasty, our resident fortune teller.</h1>
+        <p>Ask Goasty a yes-or-no question and see what the stars—and his questionable crystal ball—have to say.</p>
       </header>
       <section class="page-panel oracle-panel" aria-label="Get Goasty’s advice">
         <div class="oracle-layout">
@@ -50,12 +50,12 @@
           </div>
           <div>
             <form class="oracle-form" id="oracle-form">
-              <label for="oracle-question">What’s on your mind?</label>
-              <textarea class="oracle-question" id="oracle-question" name="question" maxlength="500" minlength="3" placeholder="Will taking a chance on something new feel right?" required></textarea>
-              <div class="oracle-suggestions" aria-label="Try asking">
-                <button class="oracle-suggestion" type="button" data-question="What small step might help me feel unstuck?">Help me feel unstuck</button>
-                <button class="oracle-suggestion" type="button" data-question="How can I be kinder to myself today?">A little self-kindness</button>
-                <button class="oracle-suggestion" type="button" data-question="What should I keep in mind before a big decision?">A big decision</button>
+              <label for="oracle-question">What do you wish to know?</label>
+              <textarea class="oracle-question" id="oracle-question" name="question" maxlength="500" minlength="3" placeholder="Will I have a lovely day today?" required></textarea>
+              <div class="oracle-suggestions" aria-label="Try asking a yes-or-no question">
+                <button class="oracle-suggestion" type="button" data-question="Should I get a little treat today?">Should I get a treat?</button>
+                <button class="oracle-suggestion" type="button" data-question="Will my plans work out?">Will my plans work out?</button>
+                <button class="oracle-suggestion" type="button" data-question="Is it time for a nap?">Is it nap time?</button>
               </div>
               <button class="page-button oracle-submit" id="oracle-submit" type="submit">Get Goasty’s advice <span aria-hidden="true">✦</span></button>
               <p class="oracle-message" id="oracle-message" aria-live="polite"></p>
@@ -63,11 +63,10 @@
           </div>
         </div>
         <div class="oracle-answer" id="oracle-answer" aria-live="polite"></div>
-        <p class="oracle-disclosure">Thoughtful reflections chosen from a written collection · your question stays on this device · not professional advice</p>
       </section>
     </div>
   </main>
-  <footer><div class="footer-inner wrap"><a class="brand" href="index.html#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a><span>A cozy corner of the cosmos · <span id="year"></span></span><div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="oracle.html">Oracle</a><a href="manifestation.html">Manifestation</a><a href="journaling.html">Journal prompts</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">Chart &amp; privacy</a></div></div></footer>
+  <footer><div class="footer-inner wrap"><a class="brand" href="index.html#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a><span>A cozy corner of the cosmos · <span id="year"></span></span><div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="oracle.html">Oracle</a><a href="manifestation.html">Manifestation</a><a href="journaling.html">Journal prompts</a><a href="zodiac-signs.html">Zodiac signs</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">Meet the creator</a></div></div></footer>
   <script>
     const form = document.querySelector("#oracle-form");
     const questionInput = document.querySelector("#oracle-question");
@@ -76,52 +75,44 @@
     const answer = document.querySelector("#oracle-answer");
     const genie = document.querySelector("#oracle-genie");
     const oracleStatus = document.querySelector("#oracle-status");
-    const adviceCollections = [
-      {
-        matches: /\b(friend|friendship|partner|relationship|love|dating|crush|breakup|family|text them|talk to them)\b/i,
-        replies: [
-          "It may help to separate what you hope will happen from what you can choose next. A kind, honest conversation—or a little time to understand what you need—can give you more clarity.",
-          "You deserve connections where care and respect go both ways. Notice how this relationship feels over time, and consider one small boundary or conversation that would support you.",
-          "You don’t have to guess someone else’s thoughts to honor your own. What would feel honest, respectful, and kind to you in this situation?"
-        ]
-      },
-      {
-        matches: /\b(work|job|career|school|class|study|exam|project|boss|coworker|college|assignment)\b/i,
-        replies: [
-          "Try making the next step smaller than the whole goal: open the document, list three options, or ask one person a clear question. Small progress still counts.",
-          "You don’t need to map your entire future today. Write down what matters most in this situation, then choose one practical step you can take this week.",
-          "A pause can be part of making progress. What would make this feel more manageable—a little help, a clearer plan, or some proper rest?"
-        ]
-      },
-      {
-        matches: /\b(change|new|decision|decide|choice|risk|move|moving|start|begin|quit|leave|try)\b/i,
-        replies: [
-          "You don’t have to leap without looking. Try a small, reversible experiment first, and notice what you learn before deciding on a bigger step.",
-          "List what you know, what you’re still unsure about, and what you can find out next. Clarity often comes from one grounded step, not pressure to be certain.",
-          "There may be more than one good path here. Give yourself time to compare what each choice asks of you and which one best fits your needs and values."
-        ]
-      },
-      {
-        matches: /\b(stress|anxious|anxiety|overwhelmed|sad|lonely|tired|burnt out|burned out|self.kindness|confidence|scared|afraid|stuck)\b/i,
-        replies: [
-          "You don’t have to earn a gentler moment. Try naming what feels hardest, then choose one caring thing you can do in the next ten minutes.",
-          "When everything feels like a lot, come back to what’s directly in front of you. A sip of water, a slower breath, or asking someone safe for company can be enough for this moment.",
-          "Feeling uncertain doesn’t mean you’re failing. You can take a break, ask for support, and return to this one piece at a time."
-        ]
-      },
-      {
-        matches: /\b(money|budget|spend|debt|save|rent|bill|finance)\b/i,
-        replies: [
-          "Start with a clear, kind look at the facts—what’s due, what’s available, and when. One small step, like checking a bill or asking a trusted person to review a plan, may make things feel less foggy.",
-          "You deserve decisions made without shame or panic. Gather the numbers you have, focus on what you can control today, and seek qualified help if the stakes feel high."
-        ]
-      }
+    const oracleReplies = [
+      "Yes. The stars have put it in writing. In glitter.",
+      "No. Goasty consulted a very small, very serious owl.",
+      "Maybe. The crystal ball is buffering.",
+      "It is decidedly so. Goasty has already prepared a tiny celebration.",
+      "Outlook good! A second opinion from a houseplant agrees.",
+      "Signs point to yes. One of the signs may be a doodle, but still.",
+      "Without a doubt. Goasty said it with his whole ghost.",
+      "Yes, but first: hydrate. The stars insist.",
+      "Ask again later. Goasty is upside down in the cosmic beanbag.",
+      "Better not tell you now. Goasty signed a mysterious confidentiality scroll.",
+      "Cannot predict now. The crystal ball is full of soup.",
+      "Concentrate and ask again. Goasty got distracted by a shiny button.",
+      "The answer is hiding behind the moon. Goasty is looking.",
+      "Maybe yes. Maybe no. Definitely time for a little snack.",
+      "The stars say yes-ish. Please respect the ish.",
+      "Nope-a-rooni. Goasty has spoken, and he is wearing a tiny cape.",
+      "Yes! Somewhere, a tiny celestial marching band just started.",
+      "The vibes are promising. The crystal ball is doing a little wiggle.",
+      "Not today, cosmic cupcake. Try again when the moon feels less dramatic.",
+      "Goasty's official answer: probably. His unofficial answer: ask a cat.",
+      "A strong maybe, with a side of glitter.",
+      "Yes, unless Mercury is carrying a very large laundry basket.",
+      "The universe says: let's not be dramatic. Probably yes.",
+      "The answer is no... wait, Goasty sneezed. Maybe.",
+      "Outlook unclear. Goasty's ghost fog machine needs a tune-up.",
+      "Absolutely! Goasty is nodding so hard his little sheet is fluttering.",
+      "The stars are quiet. Goasty thinks they might be napping.",
+      "Maybe. Consult your intuition, then consult the snack cupboard.",
+      "Yes, but only if you do a small happy dance. Goasty will join.",
+      "The cosmic committee has reviewed your question. They request more cookies.",
+      "Ask again after one dramatic twirl. Goasty loves a dramatic twirl.",
+      "Signs point to yes, but Goasty cannot be held responsible for confetti.",
+      "No, probably. The crystal ball just made a tiny raspberry noise.",
+      "The answer is somewhere between yes and 'let's see how it goes.'",
+      "Goasty says yes. His ghost lawyer says maybe."
     ];
-    const generalAdvice = [
-      "You don’t have to solve the whole thing at once. What is one small, kind next step that would help you feel a little clearer?",
-      "Take a breath and give yourself permission to gather more information. You can move forward at a pace that respects your needs.",
-      "Try asking yourself: what do I know, what do I need, and who could support me? One honest answer is a good place to begin."
-    ];
+    let previousReplyIndex = -1;
 
     document.querySelectorAll(".oracle-suggestion").forEach((button) => {
       button.addEventListener("click", () => {
@@ -143,10 +134,13 @@
       answer.textContent = "";
       message.textContent = "";
       try {
-        const collection = adviceCollections.find((item) => item.matches.test(question));
-        const replies = collection ? collection.replies : generalAdvice;
-        answer.textContent = replies[Math.floor(Math.random() * replies.length)];
-        oracleStatus.textContent = "Goasty has a thought for you ✦";
+        const choices = oracleReplies
+          .map((reply, index) => ({ reply, index }))
+          .filter(({ index }) => index !== previousReplyIndex);
+        const selected = choices[Math.floor(Math.random() * choices.length)];
+        previousReplyIndex = selected.index;
+        answer.textContent = selected.reply;
+        oracleStatus.textContent = "Goasty has an answer for you ✦";
       } catch (error) {
         console.error("Unable to prepare an oracle reflection:", error);
         message.textContent = "The oracle couldn’t find a reflection just now. Please try again.";

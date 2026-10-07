@@ -33,7 +33,8 @@ const publicFiles = new Set([
   "oracle.html",
   "pages.css",
   "site.js",
-  "tarot.html"
+  "tarot.html",
+  "zodiac-signs.html"
 ]);
 const mimeTypes = new Map([
   [".css", "text/css; charset=utf-8"],

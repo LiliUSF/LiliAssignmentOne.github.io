@@ -166,7 +166,7 @@
     footer { padding: 18px 0; border-top: 1px solid var(--line); color: #8797a9; font-size: 9px; }
     .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 14px; }
 
-    @keyframes twinkle { from { opacity: .62; transform: scale(.9) rotate(-7deg); } to { opacity: 1; transform: scale(1.13) rotate(8deg); } }
+    @keyframes twinkle { from { opacity: .25; transform: scale(.7) rotate(-16deg); text-shadow: 0 0 5px #fff4cc; } to { opacity: 1; transform: scale(1.32) rotate(16deg); text-shadow: 0 0 18px #fff4cc, 0 0 30px #f0c65b; } }
     @keyframes reveal { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
 
     @media (max-width: 780px) {
@@ -418,8 +418,9 @@
         <a href="tarot.html">Tarot readings</a>
         <a href="manifestation.html">Manifestation</a>
         <a href="journaling.html">Journal prompts</a>
+        <a href="zodiac-signs.html">Zodiac signs</a>
         <a href="angel-numbers.html">Angel numbers</a>
-        <a href="about.html">About the chart</a>
+        <a href="about.html">Meet the creator</a>
         <a href="oracle.html">Oracle</a>
       </div>
       <a class="nav-cta" href="#welcome">Find your big three <span aria-hidden="true">✦</span></a>
@@ -508,7 +509,7 @@
               <select id="birth-location-match" name="locationMatch" required disabled>
                 <option value="">Search for a city above to see matches</option>
               </select>
-              <p class="field-hint">We use Open-Meteo to find the city’s coordinates and time zone. <a href="about.html#privacy">See how your information is used.</a></p>
+              <p class="field-hint">Search for your birthplace and choose the matching city.</p>
             </div>
           </div>
           <button class="button button-primary form-submit" type="submit">Plot my whole sky <span aria-hidden="true">✦</span></button>
@@ -545,9 +546,7 @@
           <div class="planet-grid" id="planet-grid" aria-label="Planetary sign placements"></div>
           <h3 class="planet-list-heading">Your whole-sign houses <span>✧</span></h3>
           <div class="planet-grid" id="house-grid" aria-label="Whole-sign house placements"></div>
-          <p class="chart-note">House signs start from your Rising sign using the whole-sign house system; no house cusps or degrees are calculated.</p>
           <p class="chart-note" id="birth-summary"></p>
-          <p class="chart-note">Tropical planetary positions use Astronomy Engine; the North Node and whole-sign houses are estimates. <a href="about.html#chart-method">How this chart works</a>.</p>
         </article>
         <article class="panel reading-panel">
           <span class="greeting">Your horoscope for today ✦</span>
@@ -581,7 +580,7 @@
     <div class="footer-inner wrap">
       <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-name">lilis little sky</span></a>
       <span>A cozy corner of the cosmos · <span id="year"></span></span>
-    <div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="oracle.html">Oracle</a><a href="manifestation.html">Manifestation</a><a href="journaling.html">Journal prompts</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">Chart &amp; privacy</a></div>
+    <div class="footer-links"><a href="horoscope.html">Horoscope</a><a href="tarot.html">Tarot</a><a href="oracle.html">Oracle</a><a href="manifestation.html">Manifestation</a><a href="journaling.html">Journal prompts</a><a href="zodiac-signs.html">Zodiac signs</a><a href="angel-numbers.html">Angel numbers</a><a href="about.html">Meet the creator</a></div>
     </div>
   </footer>
 
